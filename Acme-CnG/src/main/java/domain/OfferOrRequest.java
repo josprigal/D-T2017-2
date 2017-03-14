@@ -85,7 +85,6 @@ public class OfferOrRequest extends DomainEntity {
 
 
 	private Place				place;
-	private Search				search;
 	private Collection<Comment>	comments;
 	private Customer			customer;
 
@@ -97,15 +96,6 @@ public class OfferOrRequest extends DomainEntity {
 
 	public void setPlace(final Place place) {
 		this.place = place;
-	}
-
-	@ManyToOne
-	public Search getSearch() {
-		return this.search;
-	}
-
-	public void setSearch(final Search search) {
-		this.search = search;
 	}
 
 	@OneToMany(mappedBy = "offerOrRequest")
