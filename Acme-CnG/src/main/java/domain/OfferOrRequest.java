@@ -12,7 +12,7 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class OfferOrRequest {
+public class OfferOrRequest extends DomainEntity {
 
 	public OfferOrRequest() {
 		super();
