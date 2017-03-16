@@ -78,16 +78,26 @@ public class Comment extends DomainEntity {
 	}
 
 
-	private OfferOrRequest	offerOfRequest;
+	private OfferOrRequest	offerOrRequest;
+	private Actor actor;
 
 
-	@ManyToOne
-	public OfferOrRequest getOfferOfRequest() {
-		return this.offerOfRequest;
+	@ManyToOne()
+	public OfferOrRequest getOfferOrRequest() {
+		return this.offerOrRequest;
 	}
 
-	public void setOfferOfRequest(final OfferOrRequest offerOfRequest) {
-		this.offerOfRequest = offerOfRequest;
+	public void setOfferOrRequest(final OfferOrRequest offerOrRequest) {
+		this.offerOrRequest = offerOrRequest;
+	}
+	
+	@ManyToOne()
+	public Actor getActor() {
+		return this.actor;
+	}
+
+	public void setActor(final Actor actor) {
+		this.actor = actor;
 	}
 
 }

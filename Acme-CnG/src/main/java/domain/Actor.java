@@ -76,7 +76,7 @@ public class Actor extends DomainEntity {
 		this.comments = comments;
 	}
 
-	@OneToMany(mappedBy = "actor")
+	@OneToMany()
 	public Collection<Application> getApplications() {
 		return this.application;
 	}

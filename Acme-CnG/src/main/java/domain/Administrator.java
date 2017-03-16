@@ -21,7 +21,7 @@ public class Administrator extends Actor {
 	private Collection<Banner>	banner;
 
 
-	@OneToMany(mappedBy = "actor")
+	@OneToMany()
 	public Collection<Banner> getBanner() {
 		return this.banner;
 	}
