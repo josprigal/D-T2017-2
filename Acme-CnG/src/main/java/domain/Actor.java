@@ -5,11 +5,16 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+
+import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -83,5 +88,19 @@ public class Actor extends DomainEntity {
 
 	public void setApplications(final Collection<Application> application) {
 		this.application = application;
+	}
+	
+	
+
+	private UserAccount userAccount;
+
+	@Valid
+	@OneToOne(cascade = CascadeType.ALL)
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 }

@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -56,7 +50,72 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Other domain beans come here -->	
-	
+
+	<!-- Other domain beans come here -->
+
+
+
+	<bean id="place1" class="domain.Place">
+		<property name="address" value="c/trebol nº14" />
+		<property name="gpsCoordinates" value="12341235414351234SADG" />
+	</bean>
+
+	<bean id="place2" class="domain.Place">
+		<property name="address" value="c/trebol nº15" />
+		<property name="gpsCoordinates" value="12341235ADG" />
+	</bean>
+
+	<bean id="place3" class="domain.Place">
+		<property name="address" value="c/trebol nº16" />
+		<property name="gpsCoordinates" value="12341234SADG" />
+	</bean>
+
+	<bean id="application1" class="domain.Application">
+		<property name="type" value="accepted" />
+
+	</bean>
+
+	<bean id="application2" class="domain.Application">
+		<property name="type" value="denied" />
+
+	</bean>
+
+	<bean id="application3" class="domain.Application">
+		<property name="type" value="denied" />
+
+	</bean>
+
+	<bean id="banner1" class="domain.Banner">
+		<property name="image"
+			value="https://pbs.twimg.com/profile_images/797215075941498880/XsJG_XtV.jpg" />
+
+	</bean>
+
+	<bean id="banner2" class="domain.Banner">
+		<property name="image"
+			value="https://pbs.twimg.com/profile_images/616302016806133761/laypFc93.png" />
+
+	</bean>
+
+	<bean id="banner3" class="domain.Banner">
+		<property name="image"
+			value="http://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Ribbons-and-Banners-PNG/Decorative_Banner_Transparent_PNG_Picture.png?m=1412430660" />
+
+	</bean>
+
+
+	<bean id="administrator1" class="domain.Administrator">
+
+		<property name="name" value="Admin 1" />
+		<property name="email" value="admin@super.es" />
+		<property name="phone" value="975398899" />
+		<property name="userAccount" ref="userAccount1" />
+		<property name="banner">
+			<list>
+				
+					<ref bean="banner1" />
+			</list>
+		</property>
+	</bean>
+
 </beans>
