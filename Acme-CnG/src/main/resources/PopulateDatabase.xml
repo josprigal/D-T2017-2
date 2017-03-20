@@ -103,6 +103,95 @@
 
 	</bean>
 
+	<bean id="offer1" class="domain.Offer">
+
+		<property name="title" value="Offer 1" />
+		<property name="description" value="Desc 1" />
+		<property name="origin" value="Algeciras" />
+		<property name="destination" value="Gibraltar" />
+		<property name="moment" value="10/10/2015" />
+		<property name="banned" value="true" />
+		<property name="place" ref="place1" />
+		
+	</bean>
+	
+		<bean id="offer2" class="domain.Offer">
+
+		<property name="title" value="Offer 2" />
+		<property name="description" value="Desc 2" />
+		<property name="origin" value="Algeciras" />
+		<property name="destination" value="Gibraltar" />
+		<property name="moment" value="10/10/2016" />
+		<property name="banned" value="false" />
+		<property name="place" ref="place2" />
+		
+	</bean>
+	
+	
+		<bean id="request1" class="domain.Request">
+
+		<property name="title" value="Request 1" />
+		<property name="description" value="Desc 1" />
+		<property name="origin" value="Algeciras" />
+		<property name="destination" value="Gibraltar" />
+		<property name="moment" value="10/10/2015" />
+		<property name="banned" value="true" />
+		<property name="place" ref="place1" />
+		
+	</bean>
+	
+	<bean id="request2" class="domain.Request">
+
+		<property name="title" value="Request 2" />
+		<property name="description" value="Desc 2" />
+		<property name="origin" value="Algeciras" />
+		<property name="destination" value="Gibraltar" />
+		<property name="moment" value="11/11/2016" />
+		<property name="banned" value="false" />
+		<property name="place" ref="place3" />
+		
+	</bean>
+	
+
+	<bean id="comment1" class="domain.Comment">
+
+		<property name="title" value="Comment 1" />
+		<property name="text" value="text 1" />
+		<property name="rate" value="5" />
+		<property name="banned" value="true" />
+		<property name="offerOrRequest" ref="offer1" />
+		
+	</bean>
+	
+	<bean id="comment2" class="domain.Comment">
+
+		<property name="title" value="Comment 2" />
+		<property name="text" value="text 2" />
+		<property name="rate" value="5" />
+		<property name="banned" value="false" />
+		<property name="offerOrRequest" ref="offer2" />
+		
+	</bean>
+	
+	<bean id="comment3" class="domain.Comment">
+
+		<property name="title" value="Comment 3" />
+		<property name="text" value="text 3" />
+		<property name="rate" value="5" />
+		<property name="banned" value="false" />
+		<property name="offerOrRequest" ref="request2" />
+		
+	</bean>
+	
+	<bean id="comment4" class="domain.Comment">
+
+		<property name="title" value="Comment 4" />
+		<property name="text" value="text 4" />
+		<property name="rate" value="5" />
+		<property name="banned" value="false" />
+		<property name="offerOrRequest" ref="request2" />
+		
+	</bean>
 
 	<bean id="administrator1" class="domain.Administrator">
 
@@ -112,8 +201,8 @@
 		<property name="userAccount" ref="userAccount1" />
 		<property name="banner">
 			<list>
-				
-					<ref bean="banner1" />
+
+				<ref bean="banner1" />
 			</list>
 		</property>
 	</bean>
