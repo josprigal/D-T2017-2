@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CustomerRepository;
+import security.Authority;
 import domain.Customer;
 
 @Service
@@ -21,6 +24,16 @@ public class CustomerService {
 
 	public CustomerService() {
 		super();
+	}
+	public void create(final Customer customer) {
+		Assert.notNull(customer);
+		final List<Authority> authorities = new ArrayList<Authority>();
+		final Authority a = new Authority();
+		a.setAuthority("CUSTOMER");
+		authorities.add(a);
+		customer.getUserAccount().setAuthorities(authorities);
+		Assert.notNull(customer);
+		this.customerRepository.save(customer);
 	}
 
 	public Collection<Customer> findAll() {
