@@ -192,13 +192,57 @@
 		<property name="offerOrRequest" ref="request2" />
 		
 	</bean>
+	
+	<bean id="message1" class="domain.Message">
 
+		<property name="title" value="Message 1" />
+		<property name="sent" value="10/10/2013" />
+		<property name="sender" value="customer1" />
+		<property name="text" value="text 1" />
+		<property name="attachments" value="https://www.google.es/" />
+		
+	</bean>
+	
+	<bean id="message2" class="domain.Message">
+
+		<property name="title" value="Message 2" />
+		<property name="sent" value="10/10/2013" />
+		<property name="sender" value="customer1" />
+		<property name="text" value="text 1" />
+		<property name="attachments" value="https://www.google.es/" />
+		
+	</bean>
+<bean id="message3" class="domain.Message">
+
+		<property name="title" value="Message 3" />
+		<property name="sent" value="10/10/2013" />
+		<property name="sender" value="customer1" />
+		<property name="text" value="text 1" />
+		<property name="attachments" value="https://www.google.es/" />
+		
+	</bean>
+<bean id="message4" class="domain.Message">
+
+		<property name="title" value="Message 4" />
+		<property name="sent" value="10/10/2013" />
+		<property name="sender" value="customer1" />
+		<property name="text" value="text 1" />
+		<property name="attachments" value="https://www.google.es/" />
+		
+	</bean>
 	<bean id="administrator1" class="domain.Administrator">
 
 		<property name="name" value="Admin 1" />
 		<property name="email" value="admin@super.es" />
 		<property name="phone" value="975398899" />
 		<property name="userAccount" ref="userAccount1" />
+		<property name="messages">
+			<list>
+
+				<ref bean="message4" />
+		
+			</list>
+		</property>
 		<property name="banner">
 			<list>
 
@@ -206,5 +250,46 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="administrator2" class="domain.Administrator">
 
+		<property name="name" value="Admin 2" />
+		<property name="email" value="admin@super.es" />
+		<property name="phone" value="975398899" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="messages">
+			<list>
+
+				<ref bean="message3" />
+				
+			</list>
+		</property>
+		<property name="banner">
+			<list>
+
+				<ref bean="banner2" />
+			</list>
+		</property>
+	</bean>
+<bean id="customer1" class="domain.Customer">
+
+		<property name="name" value="Customer 1" />
+		<property name="email" value="customer@super.es" />
+		<property name="phone" value="975398899" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="messages">
+			<list>
+
+				<ref bean="message1" />
+				<ref bean="message2" />
+			</list>
+		</property>
+		<property name="offerOrRequests">
+			<list>
+
+				<ref bean="offer1" />
+				<ref bean="request1" />
+			</list>
+		</property>
+	</bean>
 </beans>
