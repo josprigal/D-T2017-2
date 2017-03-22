@@ -50,4 +50,14 @@ public class OfferService {
 		this.offerRepository.delete(offer);
 	}
 
+	public Double avgApplicationsPerOffer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgCommensPerOffer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

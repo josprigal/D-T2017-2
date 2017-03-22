@@ -50,4 +50,9 @@ public class AdministratorService {
 		this.administratorRepository.delete(administrator);
 	}
 
+	public Double avgCommensPerAdmin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

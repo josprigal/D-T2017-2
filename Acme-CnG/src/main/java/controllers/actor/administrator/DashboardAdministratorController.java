@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import services.ActorService;
+import services.AdministratorService;
+import services.CustomerService;
+import services.OfferOrRequestService;
+import services.OfferService;
+import services.RequestService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Customer;
@@ -20,6 +26,16 @@ public class DashboardAdministratorController extends AbstractController {
 
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private AdministratorService administratorService;
+	@Autowired
+	private OfferOrRequestService offerOrRequestService;
+	@Autowired
+	private OfferService offerService;
+	@Autowired
+	private RequestService requestService;
 
 	// Constructor
 
@@ -33,27 +49,27 @@ public class DashboardAdministratorController extends AbstractController {
 	public ModelAndView displayDashboard() {
 		ModelAndView result;
 
-		Double ratioOffersVersusRequest = null;
-		Double avgOffersCustomer = null;
-		Double avgRequestCustomer = null;
-		Double avgApplicationsPerOffer = null;
-		Double avgApplicationsPerRequest = null;
-		Double avgCommensPerAdmin = null;
-		Double avgCommensPerCustomer = null;
-		Double avgCommensPerActor = null;
-		Double avgCommensPerOffer = null;
-		Double avgCommensPerRequest = null;
-		Integer minMessagesSentPerActor = null;
-		Integer maxMessagesSentPerActor = null;
-		Double avgMessagesSentPerActor = null;
-		Integer minMessagesReceivedPerActor = null;
-		Integer maxMessagesReceivedPerActor = null;
-		Double avgMessagesReceivedPerActor = null;
-		Collection<Customer> customerMoreDenied = null;
-		Collection<Customer> customerMoreAccepted = null;
-		Collection<Actor> actorMoreThan10Percent = null;
-		Collection<Actor> actorHasMoreMessages = null;
-		Collection<Actor> actorSentMoreMessages = null;
+		Double ratioOffersVersusRequest = offerOrRequestService.ratioOffersVersusRequest();
+		Double avgOffersCustomer = customerService.avgOffersCustomer();
+		Double avgRequestCustomer = customerService.avgRequestCustomer();
+		Double avgApplicationsPerOffer = offerService.avgApplicationsPerOffer();
+		Double avgApplicationsPerRequest = requestService.avgApplicationsPerRequest();
+		Double avgCommensPerAdmin = administratorService.avgCommensPerAdmin();
+		Double avgCommensPerCustomer = customerService.avgCommensPerCustomer();
+		Double avgCommensPerActor = actorService.avgCommensPerActor();
+		Double avgCommensPerOffer = offerService.avgCommensPerOffer();
+		Double avgCommensPerRequest = requestService.avgCommensPerRequest();
+		Integer minMessagesSentPerActor = actorService.minMessagesSentPerActor();
+		Integer maxMessagesSentPerActor = actorService.maxMessagesSentPerActor();
+		Double avgMessagesSentPerActor = actorService.avgMessagesSentPerActor();
+		Integer minMessagesReceivedPerActor = actorService.minMessagesReceivedPerActor();
+		Integer maxMessagesReceivedPerActor = actorService.maxMessagesReceivedPerActor();
+		Double avgMessagesReceivedPerActor = actorService.avgMessagesReceivedPerActor();
+		Collection<Customer> customerMoreDenied = customerService.customerMoreDenied();
+		Collection<Customer> customerMoreAccepted = customerService.customerMoreAccepted();
+		Collection<Actor> actorMoreThan10Percent = actorService.actorMoreThan10Percent();
+		Collection<Actor> actorHasMoreMessages = actorService.actorHasMoreMessages();
+		Collection<Actor> actorSentMoreMessages = actorService.actorSentMoreMessages();
 
 		result = createDashboardModelAndView(ratioOffersVersusRequest,
 				avgOffersCustomer, avgRequestCustomer, avgApplicationsPerOffer,

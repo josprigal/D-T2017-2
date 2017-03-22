@@ -50,4 +50,14 @@ public class RequestService {
 		this.requestRepository.delete(request);
 	}
 
+	public Double avgApplicationsPerRequest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgCommensPerRequest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

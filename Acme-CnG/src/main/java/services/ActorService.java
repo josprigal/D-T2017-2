@@ -50,4 +50,54 @@ public class ActorService {
 		this.actorRepository.delete(actor);
 	}
 
+	public Double avgCommensPerActor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer minMessagesSentPerActor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer maxMessagesSentPerActor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgMessagesSentPerActor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer minMessagesReceivedPerActor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer maxMessagesReceivedPerActor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Double avgMessagesReceivedPerActor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Actor> actorMoreThan10Percent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Actor> actorHasMoreMessages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Actor> actorSentMoreMessages() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

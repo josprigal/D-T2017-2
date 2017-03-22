@@ -62,5 +62,25 @@ public class CustomerService {
 		Assert.isTrue(this.customerRepository.exists(customer.getId()));
 		this.customerRepository.delete(customer);
 	}
+	public Double avgOffersCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Double avgRequestCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Double avgCommensPerCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Collection<Customer> customerMoreDenied() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Collection<Customer> customerMoreAccepted() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

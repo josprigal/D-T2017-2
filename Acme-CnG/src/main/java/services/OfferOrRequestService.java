@@ -50,4 +50,9 @@ public class OfferOrRequestService {
 		this.offerOrRequestRepository.delete(offerOrRequest);
 	}
 
+	public Double ratioOffersVersusRequest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
