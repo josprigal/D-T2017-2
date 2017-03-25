@@ -7,6 +7,8 @@ import domain.OfferOrRequest;
 
 @Repository
 public interface OfferOrRequestRepository extends JpaRepository<OfferOrRequest,Integer>{
+
+	Double ratioOffersVersusRequest();
 	
 	
 }

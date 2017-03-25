@@ -23,6 +23,10 @@ public class OfferService {
 		super();
 	}
 
+	public Offer create(){
+		Offer offer= new Offer();
+		return offer;
+	}
 	public Collection<Offer> findAll() {
 		Collection<Offer> result;
 		result = this.offerRepository.findAll();

@@ -1,7 +1,8 @@
-
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,7 @@ import domain.OfferOrRequest;
 public class OfferOrRequestService {
 
 	@Autowired
-	OfferOrRequestRepository	offerOrRequestRepository;
-
+	OfferOrRequestRepository offerOrRequestRepository;
 
 	public OfferOrRequestService() {
 		super();
@@ -46,13 +46,28 @@ public class OfferOrRequestService {
 	public void delete(final OfferOrRequest offerOrRequest) {
 		Assert.notNull(offerOrRequest);
 		Assert.isTrue(offerOrRequest.getId() != 0);
-		Assert.isTrue(this.offerOrRequestRepository.exists(offerOrRequest.getId()));
+		Assert.isTrue(this.offerOrRequestRepository.exists(offerOrRequest
+				.getId()));
 		this.offerOrRequestRepository.delete(offerOrRequest);
 	}
 
 	public Double ratioOffersVersusRequest() {
 		// TODO Auto-generated method stub
-		return null;
+		return offerOrRequestRepository.ratioOffersVersusRequest();
+	}
+
+	public Collection<OfferOrRequest> findBySearch(String search) {
+		Collection<OfferOrRequest> offerOrRequests = findAll();
+		List<OfferOrRequest> offerOrRequestsFound = new ArrayList<OfferOrRequest>();
+		for (OfferOrRequest offerOrRequest : offerOrRequests) {
+			if (offerOrRequest.getTitle().contains(search)
+					|| offerOrRequest.getDescription().contains(search)
+					|| offerOrRequest.getPlace().getAddress().contains(search)) {
+				offerOrRequestsFound.add(offerOrRequest);
+
+			}
+		}
+		return offerOrRequestsFound;
 	}
 
 }
