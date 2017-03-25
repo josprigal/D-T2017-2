@@ -113,6 +113,13 @@
 		<property name="banned" value="true" />
 		<property name="place" ref="place1" />
 		<property name="customer" ref="customer1" />
+		<property name="comments">
+			<list>
+
+				<ref bean="comment1" />
+			</list>
+		</property>
+		
 	</bean>
 	
 		<bean id="offer2" class="domain.Offer">
@@ -124,7 +131,12 @@
 		<property name="moment" value="10/10/2016" />
 		<property name="banned" value="false" />
 		<property name="place" ref="place2" />
-		
+		<property name="comments">
+			<list>
+
+				<ref bean="comment2" />
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -149,6 +161,13 @@
 		<property name="moment" value="11/11/2016" />
 		<property name="banned" value="false" />
 		<property name="place" ref="place3" />
+		<property name="comments">
+			<list>
+
+				<ref bean="comment3" />
+				<ref bean="comment4" />
+			</list>
+		</property>
 		
 	</bean>
 	
@@ -160,7 +179,7 @@
 		<property name="rate" value="5" />
 		<property name="banned" value="true" />
 		<property name="offerOrRequest" ref="offer1" />
-		
+		<property name="actor" ref="customer1" />
 	</bean>
 	
 	<bean id="comment2" class="domain.Comment">
@@ -170,7 +189,7 @@
 		<property name="rate" value="5" />
 		<property name="banned" value="false" />
 		<property name="offerOrRequest" ref="offer2" />
-		
+		<property name="actor" ref="customer1" />
 	</bean>
 	
 	<bean id="comment3" class="domain.Comment">
@@ -180,7 +199,7 @@
 		<property name="rate" value="5" />
 		<property name="banned" value="false" />
 		<property name="offerOrRequest" ref="request2" />
-		
+		<property name="actor" ref="customer1" />
 	</bean>
 	
 	<bean id="comment4" class="domain.Comment">
@@ -190,7 +209,7 @@
 		<property name="rate" value="5" />
 		<property name="banned" value="false" />
 		<property name="offerOrRequest" ref="request2" />
-		
+		<property name="actor" ref="administrator1" />
 	</bean>
 	
 	<bean id="message1" class="domain.Message">
@@ -250,6 +269,12 @@
 				<ref bean="banner1" />
 			</list>
 		</property>
+		<property name="comments">
+			<list>
+
+				<ref bean="comment4" />
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="administrator2" class="domain.Administrator">
@@ -290,6 +315,15 @@
 
 				<ref bean="offer1" />
 				<ref bean="request1" />
+			</list>
+		</property>
+		
+		<property name="comments">
+			<list>
+
+				<ref bean="comment1" />
+				<ref bean="comment2" />
+				<ref bean="comment3" />
 			</list>
 		</property>
 	</bean>
