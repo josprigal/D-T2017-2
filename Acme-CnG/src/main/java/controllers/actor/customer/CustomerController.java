@@ -1,5 +1,5 @@
 
-package controllers.Customer;
+package controllers.actor.customer;
 
 import javax.validation.Valid;
 
