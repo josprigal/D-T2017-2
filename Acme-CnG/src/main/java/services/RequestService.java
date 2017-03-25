@@ -57,7 +57,7 @@ public class RequestService {
 
 	public Double avgCommensPerRequest() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.requestRepository.avgCommensPerRequest();
 	}
 
 }

@@ -119,6 +119,12 @@
 				<ref bean="comment1" />
 			</list>
 		</property>
+		<property name="applications">
+			<list>
+
+				<ref bean="application1" />
+			</list>
+		</property>
 		
 	</bean>
 	
@@ -137,6 +143,14 @@
 				<ref bean="comment2" />
 			</list>
 		</property>
+		<property name="applications">
+			<list>
+
+				<ref bean="application1" />
+				<ref bean="application2" />
+			</list>
+		</property>
+		
 	</bean>
 	
 	
@@ -150,6 +164,13 @@
 		<property name="banned" value="true" />
 		<property name="place" ref="place1" />
 		<property name="customer" ref="customer1" />
+		<property name="applications">
+			<list>
+
+				<ref bean="application1" />
+				<ref bean="application2" />
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="request2" class="domain.Request">
@@ -166,6 +187,11 @@
 
 				<ref bean="comment3" />
 				<ref bean="comment4" />
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+
 			</list>
 		</property>
 		

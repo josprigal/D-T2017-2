@@ -53,8 +53,7 @@ public class DashboardAdministratorController extends AbstractController {
 
 		final Double ratioOffersVersusRequest = this.offerOrRequestService.ratioOffersVersusRequest();
 		final Double avgOffersAndRequestCustomer = this.customerService.avgOffersAndRequestCustomer();
-		final Double avgApplicationsPerOffer = this.offerService.avgApplicationsPerOffer();
-		final Double avgApplicationsPerRequest = this.requestService.avgApplicationsPerRequest();
+		final Double avgApplicationsPerOfferOrRequest = this.offerOrRequestService.avgApplicationsPerOfferOrRequest();
 		final Double avgCommensPerAdmin = this.administratorService.avgCommensPerAdmin();
 		final Double avgCommensPerCustomer = this.customerService.avgCommensPerCustomer();
 		final Double avgCommensPerActor = this.actorService.avgCommensPerActor();
@@ -72,23 +71,22 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Actor> actorHasMoreMessages = this.actorService.actorHasMoreMessages();
 		final Collection<Actor> actorSentMoreMessages = this.actorService.actorSentMoreMessages();
 
-		result = this.createDashboardModelAndView(ratioOffersVersusRequest, avgOffersAndRequestCustomer, avgApplicationsPerOffer, avgApplicationsPerRequest, avgCommensPerAdmin, avgCommensPerCustomer, avgCommensPerActor, avgCommensPerOffer,
-			avgCommensPerRequest, minMessagesSentPerActor, maxMessagesSentPerActor, avgMessagesSentPerActor, minMessagesReceivedPerActor, maxMessagesReceivedPerActor, avgMessagesReceivedPerActor, customerMoreDenied, customerMoreAccepted,
-			actorMoreThan10Percent, actorHasMoreMessages, actorSentMoreMessages);
+		result = this.createDashboardModelAndView(ratioOffersVersusRequest, avgOffersAndRequestCustomer, avgApplicationsPerOfferOrRequest, avgCommensPerAdmin, avgCommensPerCustomer, avgCommensPerActor, avgCommensPerOffer, avgCommensPerRequest,
+			minMessagesSentPerActor, maxMessagesSentPerActor, avgMessagesSentPerActor, minMessagesReceivedPerActor, maxMessagesReceivedPerActor, avgMessagesReceivedPerActor, customerMoreDenied, customerMoreAccepted, actorMoreThan10Percent,
+			actorHasMoreMessages, actorSentMoreMessages);
 		return result;
 	}
-	protected ModelAndView createDashboardModelAndView(final Double ratioOffersVersusRequest, final Double avgOffersAndRequestCustomer, final Double avgApplicationsPerOffer, final Double avgApplicationsPerRequest, final Double avgCommensPerAdmin,
-		final Double avgCommensPerCustomer, final Double avgCommensPerActor, final Double avgCommensPerOffer, final Double avgCommensPerRequest, final Integer minMessagesSentPerActor, final Integer maxMessagesSentPerActor,
-		final Double avgMessagesSentPerActor, final Integer minMessagesReceivedPerActor, final Integer maxMessagesReceivedPerActor, final Double avgMessagesReceivedPerActor, final Collection<Customer> customerMoreDenied,
-		final Collection<Customer> customerMoreAccepted, final Collection<Actor> actorMoreThan10Percent, final Collection<Actor> actorHasMoreMessages, final Collection<Actor> actorSentMoreMessages) {
+	protected ModelAndView createDashboardModelAndView(final Double ratioOffersVersusRequest, final Double avgOffersAndRequestCustomer, final Double avgApplicationsPerOfferOrRequest, final Double avgCommensPerAdmin, final Double avgCommensPerCustomer,
+		final Double avgCommensPerActor, final Double avgCommensPerOffer, final Double avgCommensPerRequest, final Integer minMessagesSentPerActor, final Integer maxMessagesSentPerActor, final Double avgMessagesSentPerActor,
+		final Integer minMessagesReceivedPerActor, final Integer maxMessagesReceivedPerActor, final Double avgMessagesReceivedPerActor, final Collection<Customer> customerMoreDenied, final Collection<Customer> customerMoreAccepted,
+		final Collection<Actor> actorMoreThan10Percent, final Collection<Actor> actorHasMoreMessages, final Collection<Actor> actorSentMoreMessages) {
 		ModelAndView result;
 
-		result = new ModelAndView("actor/administrator/dashboard");
+		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("ratioOffersVersusRequest", ratioOffersVersusRequest);
 		result.addObject("avgOffersAndRequestCustomer", avgOffersAndRequestCustomer);
-		result.addObject("avgApplicationsPerOffer", avgApplicationsPerOffer);
-		result.addObject("avgApplicationsPerRequest", avgApplicationsPerRequest);
+		result.addObject("avgApplicationsPerOfferOrRequest", avgApplicationsPerOfferOrRequest);
 		result.addObject("avgCommensPerAdmin", avgCommensPerAdmin);
 		result.addObject("avgCommensPerCustomer", avgCommensPerCustomer);
 		result.addObject("avgCommensPerActor", avgCommensPerActor);

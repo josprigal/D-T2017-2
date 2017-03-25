@@ -25,15 +25,11 @@
 
 <p>
 	<spring:message code="administrator.avgApplicationsPerOffer" />
-	${avgApplicationsPerOffer}
+	${avgApplicationsPerOfferOrRequest}
 </p>
 <br>
 
-<p>
-	<spring:message code="administrator.avgApplicationsPerRequest" />
-	${avgApplicationsPerRequest}
-</p>
-<br>
+
 
 <p>
 	<spring:message code="administrator.avgCommensPerAdmin" />

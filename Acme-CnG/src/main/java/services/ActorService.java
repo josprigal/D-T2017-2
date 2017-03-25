@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class ActorService {
 
 	@Autowired
 	ActorRepository	actorRepository;
+	@Autowired
+	CommentService	commentService;
 
 
 	public ActorService() {
@@ -52,52 +55,57 @@ public class ActorService {
 
 	public Double avgCommensPerActor() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.avgCommensPerActor();
 	}
 
 	public Integer minMessagesSentPerActor() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.minMessagesSentPerActor();
 	}
 
 	public Integer maxMessagesSentPerActor() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.maxMessagesSentPerActor();
 	}
 
 	public Double avgMessagesSentPerActor() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.avgMessagesSentPerActor();
 	}
 
 	public Integer minMessagesReceivedPerActor() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.minMessagesReceivedPerActor();
 	}
 
 	public Integer maxMessagesReceivedPerActor() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.maxMessagesReceivedPerActor();
 	}
 
 	public Double avgMessagesReceivedPerActor() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.avgMessagesReceivedPerActor();
 	}
 
 	public Collection<Actor> actorMoreThan10Percent() {
 		// TODO Auto-generated method stub
-		return null;
+		final Collection<Actor> result = new ArrayList<Actor>();
+		final Integer tam = this.commentService.findAll().size();
+		for (final Actor a : this.findAll())
+			if (a.getComments().size() >= tam)
+				result.add(a);
+		return result;
 	}
 
 	public Collection<Actor> actorHasMoreMessages() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.actorHasMoreMessages();
 	}
 
 	public Collection<Actor> actorSentMoreMessages() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.actorRepository.actorSentMoreMessages();
 	}
 
 }

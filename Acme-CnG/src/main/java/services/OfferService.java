@@ -23,8 +23,8 @@ public class OfferService {
 		super();
 	}
 
-	public Offer create(){
-		Offer offer= new Offer();
+	public Offer create() {
+		final Offer offer = new Offer();
 		return offer;
 	}
 	public Collection<Offer> findAll() {
@@ -54,14 +54,9 @@ public class OfferService {
 		this.offerRepository.delete(offer);
 	}
 
-	public Double avgApplicationsPerOffer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Double avgCommensPerOffer() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.offerRepository.avgCommensPerOffer();
 	}
 
 }

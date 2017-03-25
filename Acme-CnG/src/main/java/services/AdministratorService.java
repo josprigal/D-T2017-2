@@ -52,7 +52,7 @@ public class AdministratorService {
 
 	public Double avgCommensPerAdmin() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.administratorRepository.avgCommensPerAdministrator();
 	}
 
 }

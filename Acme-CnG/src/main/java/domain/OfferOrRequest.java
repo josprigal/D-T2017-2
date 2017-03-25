@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,6 +24,7 @@ public class OfferOrRequest extends DomainEntity {
 	public OfferOrRequest() {
 		super();
 		this.comments = new ArrayList<Comment>();
+		this.applications = new ArrayList<Application>();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -91,9 +93,10 @@ public class OfferOrRequest extends DomainEntity {
 	}
 
 
-	private Place				place;
-	private Collection<Comment>	comments;
-	private Customer			customer;
+	private Place					place;
+	private Collection<Comment>		comments;
+	private Collection<Application>	applications;
+	private Customer				customer;
 
 
 	@OneToOne
@@ -121,6 +124,14 @@ public class OfferOrRequest extends DomainEntity {
 
 	public void setCustomer(final Customer customer) {
 		this.customer = customer;
+	}
+	@ManyToMany()
+	public Collection<Application> getApplications() {
+		return this.applications;
+	}
+
+	public void setApplications(final Collection<Application> applications) {
+		this.applications = applications;
 	}
 
 }

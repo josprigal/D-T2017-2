@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.CustomerRepository;
 import security.Authority;
+import domain.Application;
 import domain.Customer;
 
 @Service
@@ -64,20 +65,45 @@ public class CustomerService {
 	}
 	public Double avgOffersAndRequestCustomer() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.customerRepository.avgOffersAndRequestCustomer();
 	}
 
 	public Double avgCommensPerCustomer() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.customerRepository.avgCommensPerCustomer();
 	}
 	public Collection<Customer> customerMoreDenied() {
 		// TODO Auto-generated method stub
-		return null;
+		final int i = 0;
+		final Collection<Customer> result = new ArrayList<Customer>();
+		final Collection<Customer> customers = this.findAll();
+		for (final Customer c : customers)
+			if (this.findApplications(c.getApplications(), "DENIED") > i) {
+				result.clear();
+				result.add(c);
+			} else if (this.findApplications(c.getApplications(), "DENIED") == i)
+				result.add(c);
+		return result;
 	}
 	public Collection<Customer> customerMoreAccepted() {
 		// TODO Auto-generated method stub
-		return null;
+		final int i = 0;
+		final Collection<Customer> result = new ArrayList<Customer>();
+		final Collection<Customer> customers = this.findAll();
+		for (final Customer c : customers)
+			if (this.findApplications(c.getApplications(), "ACCEPTED") > i) {
+				result.clear();
+				result.add(c);
+			} else if (this.findApplications(c.getApplications(), "ACCEPTED") == i)
+				result.add(c);
+		return result;
+	}
+	public Integer findApplications(final Collection<Application> apps, final String state) {
+		int i = 0;
+		for (final Application a : apps)
+			if (a.getType().equalsIgnoreCase(state))
+				i++;
+		return i;
 	}
 
 }

@@ -107,4 +107,24 @@ public class Actor extends DomainEntity {
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
+
+	public Integer getMessagesSent() {
+		int i = 0;
+		for (final Message m : this.messages)
+			if (m.getSender().equalsIgnoreCase(this.getName()))
+				i++;
+		return i;
+	}
+	public void setMessagesSent(final Integer i) {
+	}
+	public Integer getMessagesReceived() {
+		int i = 0;
+		for (final Message m : this.messages)
+			if (m.getActor().getName().equalsIgnoreCase(this.getName()))
+				i++;
+		return i;
+	}
+	public void setMessagesReceived(final Integer i) {
+	}
+
 }

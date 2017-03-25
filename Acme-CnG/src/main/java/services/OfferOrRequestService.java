@@ -71,5 +71,8 @@ public class OfferOrRequestService {
 				offerOrRequestsFound.add(offerOrRequest);
 		return offerOrRequestsFound;
 	}
+	public Double avgApplicationsPerOfferOrRequest() {
+		return this.offerOrRequestRepository.avgApplicationsPerOfferOrRequest();
+	}
 
 }
