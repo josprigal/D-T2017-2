@@ -112,7 +112,7 @@
 		<property name="moment" value="10/10/2015" />
 		<property name="banned" value="true" />
 		<property name="place" ref="place1" />
-		
+		<property name="customer" ref="customer1" />
 	</bean>
 	
 		<bean id="offer2" class="domain.Offer">
@@ -137,7 +137,7 @@
 		<property name="moment" value="10/10/2015" />
 		<property name="banned" value="true" />
 		<property name="place" ref="place1" />
-		
+		<property name="customer" ref="customer1" />
 	</bean>
 	
 	<bean id="request2" class="domain.Request">
@@ -200,6 +200,7 @@
 		<property name="sender" value="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
+		<property name="actor" ref="customer1" />
 		
 	</bean>
 	
@@ -210,7 +211,7 @@
 		<property name="sender" value="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-		
+		<property name="actor" ref="customer1" />
 	</bean>
 <bean id="message3" class="domain.Message">
 
@@ -219,7 +220,7 @@
 		<property name="sender" value="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-		
+		<property name="actor" ref="administrator2" />
 	</bean>
 <bean id="message4" class="domain.Message">
 
@@ -228,7 +229,7 @@
 		<property name="sender" value="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-		
+		<property name="actor" ref="administrator1" />
 	</bean>
 	<bean id="administrator1" class="domain.Administrator">
 
