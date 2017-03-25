@@ -1,5 +1,4 @@
-
-package controllers.Customer;
+package controllers.actor.customer;
 
 import javax.validation.Valid;
 
@@ -25,14 +24,13 @@ import domain.Customer;
 public class CustomerController {
 
 	@Autowired
-	ActorService		actorService;
+	ActorService actorService;
 
 	@Autowired
-	CustomerService		customerService;
+	CustomerService customerService;
 
 	@Autowired
-	UserDetailsService	userDetailsService;
-
+	UserDetailsService userDetailsService;
 
 	@RequestMapping(value = "/register")
 	public ModelAndView index() {
@@ -40,7 +38,9 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
-	public ModelAndView create(@ModelAttribute("user") @Valid final Customer customer, final BindingResult binding) {
+	public ModelAndView create(
+			@ModelAttribute("user") @Valid final Customer customer,
+			final BindingResult binding) {
 
 		ModelAndView result;
 
@@ -57,11 +57,14 @@ public class CustomerController {
 
 				this.customerService.create(customer);
 
-				final UserDetails userDetails = this.userDetailsService.loadUserByUsername(customer.getUserAccount().getUsername());
+				final UserDetails userDetails = this.userDetailsService
+						.loadUserByUsername(customer.getUserAccount()
+								.getUsername());
 
 				final UsernamePasswordAuthenticationToken auth =
 
-				new UsernamePasswordAuthenticationToken(userDetails, customer.getUserAccount().getPassword(),
+				new UsernamePasswordAuthenticationToken(userDetails, customer
+						.getUserAccount().getPassword(),
 
 				userDetails.getAuthorities());
 				if (auth.isAuthenticated())
@@ -75,7 +78,8 @@ public class CustomerController {
 
 	}
 
-	protected ModelAndView createEditModelAndView(final Customer customer, final String message) {
+	protected ModelAndView createEditModelAndView(final Customer customer,
+			final String message) {
 
 		ModelAndView result;
 		result = new ModelAndView("customer/register");

@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +58,18 @@ public class OfferOrRequestService {
 
 	public Double ratioOffersVersusRequest() {
 		// TODO Auto-generated method stub
+
 		return (double) (this.offerService.findAll().size() / this.requestService.findAll().size());
+
+	}
+
+	public Collection<OfferOrRequest> findBySearch(final String search) {
+		final Collection<OfferOrRequest> offerOrRequests = this.findAll();
+		final List<OfferOrRequest> offerOrRequestsFound = new ArrayList<OfferOrRequest>();
+		for (final OfferOrRequest offerOrRequest : offerOrRequests)
+			if (offerOrRequest.getTitle().contains(search) || offerOrRequest.getDescription().contains(search) || offerOrRequest.getPlace().getAddress().contains(search))
+				offerOrRequestsFound.add(offerOrRequest);
+		return offerOrRequestsFound;
 	}
 
 }
