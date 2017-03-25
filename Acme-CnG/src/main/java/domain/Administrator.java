@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -14,6 +15,7 @@ public class Administrator extends Actor {
 
 	public Administrator() {
 		super();
+		this.banner = new ArrayList<Banner>();
 		// TODO Auto-generated constructor stub
 	}
 

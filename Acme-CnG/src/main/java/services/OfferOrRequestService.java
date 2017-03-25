@@ -16,6 +16,10 @@ import domain.OfferOrRequest;
 public class OfferOrRequestService {
 
 	@Autowired
+	OfferService				offerService;
+	@Autowired
+	RequestService				requestService;
+	@Autowired
 	OfferOrRequestRepository	offerOrRequestRepository;
 
 
@@ -52,7 +56,7 @@ public class OfferOrRequestService {
 
 	public Double ratioOffersVersusRequest() {
 		// TODO Auto-generated method stub
-		return null;
+		return (double) (this.offerService.findAll().size() / this.requestService.findAll().size());
 	}
 
 }

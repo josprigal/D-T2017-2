@@ -18,13 +18,9 @@
 
 <p>
 	<spring:message code="administrator.avgOffersCustomer" />
-	${avgOffersCustomer}
+	${avgOffersAndRequestCustomer}
 </p>
-<br>
-<p>
-	<spring:message code="administrator.avgRequestCustomer" />
-	${avgRequestCustomer}
-</p>
+
 <br>
 
 <p>

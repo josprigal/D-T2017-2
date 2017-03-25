@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -21,6 +22,7 @@ public class OfferOrRequest extends DomainEntity {
 
 	public OfferOrRequest() {
 		super();
+		this.comments = new ArrayList<Comment>();
 		// TODO Auto-generated constructor stub
 	}
 

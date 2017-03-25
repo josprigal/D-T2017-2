@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -14,6 +15,7 @@ public class Customer extends Actor {
 
 	public Customer() {
 		super();
+		this.offerOrRequests = new ArrayList<OfferOrRequest>();
 		// TODO Auto-generated constructor stub
 	}
 

@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -27,6 +28,9 @@ public class Actor extends DomainEntity {
 
 	public Actor() {
 		super();
+		this.messages = new ArrayList<Message>();
+		this.comments = new ArrayList<Comment>();
+		this.application = new ArrayList<Application>();
 	}
 
 	@NotBlank
@@ -89,18 +93,18 @@ public class Actor extends DomainEntity {
 	public void setApplications(final Collection<Application> application) {
 		this.application = application;
 	}
-	
-	
 
-	private UserAccount userAccount;
+
+	private UserAccount	userAccount;
+
 
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
 	public UserAccount getUserAccount() {
-		return userAccount;
+		return this.userAccount;
 	}
 
-	public void setUserAccount(UserAccount userAccount) {
+	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
 }
