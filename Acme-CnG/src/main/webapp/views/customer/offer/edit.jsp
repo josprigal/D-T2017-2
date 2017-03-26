@@ -11,18 +11,15 @@
 
 <h1><spring:message code="edit"/> <spring:message code="property" /> </h1>
     <form:form  modelAttribute="form" method="POST">
-        <acme:textbox path="property.name" code="name"/>
-        <form:hidden path="property.id"/>
-        <acme:textbox path="property.description" code="description"/>
-        <acme:textbox path="property.address" code="address"/>
-        <acme:textbox path="property.rate" code="rate"/>
-        <jstl:forEach items="${form.attributesValue}" var="attribute" varStatus="i">
-            <form:label path="attributesValue[${i.index}].value">
-                ${form.attributesValue[i.index].attribute.name}
-            </form:label>
-            <form:hidden path="attributesValue[${i.index}].id" />
-            <acme:textbox path="attributesValue[${i.index}].value" code="blank"/>
-            <form:hidden path="attributesValue[${i.index}].attribute" />
-        </jstl:forEach>
+        <acme:textbox path="offer.title" code="name"/>
+        <form:hidden path="offer.id"/>
+        <acme:textbox path="offer.description" code="description"/>
+        <acme:textbox path="offer.moment" code="address"/>
+        <form:hidden path="offer.banned"/>
+        <acme:textbox path="offer.place." code="rate"/>
+        <acme:textbox path="origin.address" code="rate"/>
+        <acme:textbox path="origin.gpsCoordinates" code="rate"/>
+         <acme:textbox path="destination.address" code="rate"/>
+        <acme:textbox path="destination.gpsCoordinates" code="rate"/>
         <acme:submit name="edit" code="edit"/>
     </form:form>

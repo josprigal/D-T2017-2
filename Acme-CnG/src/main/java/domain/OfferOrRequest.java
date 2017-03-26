@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -31,8 +30,6 @@ public class OfferOrRequest extends DomainEntity {
 
 	private String	title;
 	private String	description;
-	private String	origin;
-	private String	destination;
 	private Date	moment;
 	private boolean	banned;
 
@@ -55,24 +52,6 @@ public class OfferOrRequest extends DomainEntity {
 		this.description = description;
 	}
 
-	@NotBlank
-	public String getOrigin() {
-		return this.origin;
-	}
-
-	public void setOrigin(final String origin) {
-		this.origin = origin;
-	}
-
-	@NotBlank
-	public String getDestination() {
-		return this.destination;
-	}
-
-	public void setDestination(final String destination) {
-		this.destination = destination;
-	}
-
 	@NotNull
 	@Past
 	public Date getMoment() {
@@ -93,18 +72,18 @@ public class OfferOrRequest extends DomainEntity {
 	}
 
 
-	private Place					place;
+	private Collection<Place>		place;
 	private Collection<Comment>		comments;
 	private Collection<Application>	applications;
 	private Customer				customer;
 
 
-	@OneToOne
-	public Place getPlace() {
+	@OneToMany
+	public Collection<Place> getPlace() {
 		return this.place;
 	}
 
-	public void setPlace(final Place place) {
+	public void setPlace(final Collection<Place> place) {
 		this.place = place;
 	}
 

@@ -61,14 +61,43 @@
 	</bean>
 
 	<bean id="place2" class="domain.Place">
-		<property name="address" value="c/trebol nº15" />
+		<property name="address" value="Avila" />
 		<property name="gpsCoordinates" value="12341235ADG" />
 	</bean>
 
 	<bean id="place3" class="domain.Place">
-		<property name="address" value="c/trebol nº16" />
+		<property name="address" value="Murcia" />
 		<property name="gpsCoordinates" value="12341234SADG" />
 	</bean>
+	
+	<bean id="place4" class="domain.Place">
+		<property name="address" value="Sevilla" />
+		<property name="gpsCoordinates" value="12341235414351234SADG" />
+	</bean>
+	
+	
+	<bean id="place5" class="domain.Place">
+		<property name="address" value="Algeciras" />
+		<property name="gpsCoordinates" value="12341235414351234SADG" />
+	</bean>
+	
+	
+	<bean id="place6" class="domain.Place">
+		<property name="address" value="calle gladiolo nº14" />
+		<property name="gpsCoordinates" value="12341235414351234SADG" />
+	</bean>
+	
+	<bean id="place7" class="domain.Place">
+		<property name="address" value="amapola nº14" />
+		<property name="gpsCoordinates" value="12341235414351234SADG" />
+	</bean>
+	
+	<bean id="place8" class="domain.Place">
+		<property name="address" value="c/trebol nº15" />
+		<property name="gpsCoordinates" value="12341235414351234SADG" />
+	</bean>
+	
+	
 
 	<bean id="application1" class="domain.Application">
 		<property name="type" value="accepted" />
@@ -107,12 +136,16 @@
 
 		<property name="title" value="Offer 1" />
 		<property name="description" value="Desc 1" />
-		<property name="origin" value="Algeciras" />
-		<property name="destination" value="Gibraltar" />
 		<property name="moment" value="10/10/2015" />
 		<property name="banned" value="true" />
-		<property name="place" ref="place1" />
 		<property name="customer" ref="customer1" />
+		<property name="place">
+			<list>
+
+				<ref bean="place1" />
+				<ref bean="place2" />
+			</list>
+		</property>
 		<property name="comments">
 			<list>
 
@@ -132,11 +165,15 @@
 
 		<property name="title" value="Offer 2" />
 		<property name="description" value="Desc 2" />
-		<property name="origin" value="Algeciras" />
-		<property name="destination" value="Gibraltar" />
 		<property name="moment" value="10/10/2016" />
 		<property name="banned" value="false" />
-		<property name="place" ref="place2" />
+		<property name="place">
+			<list>
+
+				<ref bean="place3" />
+				<ref bean="place4" />
+			</list>
+		</property>
 		<property name="comments">
 			<list>
 
@@ -158,11 +195,15 @@
 
 		<property name="title" value="Request 1" />
 		<property name="description" value="Desc 1" />
-		<property name="origin" value="Algeciras" />
-		<property name="destination" value="Gibraltar" />
 		<property name="moment" value="10/10/2015" />
 		<property name="banned" value="true" />
-		<property name="place" ref="place1" />
+		<property name="place">
+			<list>
+
+				<ref bean="place5" />
+				<ref bean="place6" />
+			</list>
+		</property>
 		<property name="customer" ref="customer1" />
 		<property name="applications">
 			<list>
@@ -177,11 +218,15 @@
 
 		<property name="title" value="Request 2" />
 		<property name="description" value="Desc 2" />
-		<property name="origin" value="Algeciras" />
-		<property name="destination" value="Gibraltar" />
 		<property name="moment" value="11/11/2016" />
 		<property name="banned" value="false" />
-		<property name="place" ref="place3" />
+		<property name="place">
+			<list>
+
+				<ref bean="place7" />
+				<ref bean="place8" />
+			</list>
+		</property>
 		<property name="comments">
 			<list>
 

@@ -5,6 +5,9 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.OfferOrRequestService;
 import services.OfferService;
 import domain.Offer;
+import forms.EditOfferForm;
 
 @Controller
 @RequestMapping("/actor/customer/offer")
@@ -22,31 +26,6 @@ public class OfferCustomerController {
 	@Autowired
 	private OfferOrRequestService	offerOrRequestService;
 
-
-	/*
-	 * @RequestMapping(value = "/new", method = RequestMethod.POST)
-	 * public ModelAndView createPost(
-	 * 
-	 * @ModelAttribute("form") EditPropertyForm editPropertyForm,
-	 * BindingResult bindingResult) {
-	 * Property property = propertyService.reconstruct(
-	 * editPropertyForm.getProperty(),
-	 * editPropertyForm.getAttributesValue(), bindingResult, false);
-	 * ModelAndView result;
-	 * if (bindingResult.hasErrors()) {
-	 * return createNewView(property);
-	 * } else {
-	 * try {
-	 * propertyService.save(property);
-	 * result = new ModelAndView(
-	 * "redirect:/actor/lessor/property/list.do");
-	 * return result;
-	 * } catch (Throwable oops) {
-	 * return createNewView(property);
-	 * }
-	 * }
-	 * }
-	 */
 
 	// Listing Offer
 
@@ -73,4 +52,35 @@ public class OfferCustomerController {
 		return result;
 	}
 
+	@RequestMapping("/new")
+	public ModelAndView newGet() {
+		return this.createNewView(new Offer());
+	}
+
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public ModelAndView createPost(@ModelAttribute("form") final EditOfferForm editOfferForm, final BindingResult bindingResult) {
+		final Offer offer = this.offerService.reconstruct(editOfferForm.getOffer(), bindingResult);
+		ModelAndView result;
+		if (bindingResult.hasErrors())
+			return this.createNewView(offer);
+		else
+			try {
+				this.offerService.save(offer);
+				result = new ModelAndView("redirect:/actor/lessor/offer/list.do");
+				return result;
+			} catch (final Throwable oops) {
+				return this.createNewView(offer);
+			}
+	}
+
+	private ModelAndView createNewView(final Offer offer) {
+		Assert.notNull(offer);
+
+		final ModelAndView result = new ModelAndView("actor/customer/offer/edit");
+		final EditOfferForm editOfferForm = new EditOfferForm();
+		editOfferForm.setOffer(offer);
+		result.addObject("form", editOfferForm);
+
+		return result;
+	}
 }
