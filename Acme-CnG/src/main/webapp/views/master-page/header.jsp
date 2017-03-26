@@ -35,8 +35,8 @@
 				
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/offer/list.do"><spring:message code="master.page.customer.offer" /></a></li>
-					<li><a href="customer/request/list.do"><spring:message code="master.page.customer.request" /></a></li>			
+					<li><a href="actor/customer/offer/list.do"><spring:message code="master.page.customer.offer" /></a></li>
+					<li><a href="actor/customer/request/list.do"><spring:message code="master.page.customer.request" /></a></li>			
 				</ul>
 			</li>
 		</security:authorize>
