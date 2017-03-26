@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.OfferRepository;
 import domain.Offer;
@@ -58,5 +59,8 @@ public class OfferService {
 		// TODO Auto-generated method stub
 		return this.offerRepository.avgCommensPerOffer();
 	}
+	public Offer reconstruct(final Offer offer, final BindingResult bindingResult) {
 
+		return offer;
+	}
 }
