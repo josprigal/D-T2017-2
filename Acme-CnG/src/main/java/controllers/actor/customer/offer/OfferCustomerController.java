@@ -64,13 +64,24 @@ public class OfferCustomerController {
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public ModelAndView createPost(@ModelAttribute("form") final EditOfferForm editOfferForm, final BindingResult bindingResult) {
 		final Offer offer = this.offerService.reconstruct(editOfferForm.getOffer(), bindingResult);
-		final Place origin = this.placeService.reconstruct(editOfferForm.getOrigin(), bindingResult);
-		final Place destination = this.placeService.reconstruct(editOfferForm.getDestination(), bindingResult);
+		final Place origin = this.placeService.reconstruct(editOfferForm.getOrigin(), bindingResult, false);
+		final Place destination = this.placeService.reconstruct(editOfferForm.getDestination(), bindingResult, false);
+		System.out.println(origin);
+		System.out.println(destination);
 		ModelAndView result;
 		if (bindingResult.hasErrors())
 			return this.createNewView(offer, origin, destination);
 		else
 			try {
+
+				this.placeService.save(origin);
+				this.placeService.save(destination);
+				System.out.println("hago el save");
+				final Place origin2 = this.placeService.reconstruct(origin, bindingResult, true);
+				final Place destination2 = this.placeService.reconstruct(destination, bindingResult, true);
+				offer.getPlace().add(origin2);
+				offer.getPlace().add(destination2);
+				System.out.println("TAMBIEN LLEGO");
 				this.offerService.save(offer);
 				result = new ModelAndView("redirect:/actor/customer/offer/list.do");
 				return result;

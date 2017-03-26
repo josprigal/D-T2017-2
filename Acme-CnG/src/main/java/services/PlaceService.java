@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.PlaceRepository;
 import domain.Place;
@@ -17,7 +18,9 @@ import domain.Place;
 public class PlaceService {
 
 	@Autowired
-	PlaceRepository	placeRepository;
+	PlaceRepository		placeRepository;
+	@Autowired
+	private Validator	validator;
 
 
 	public PlaceService() {
@@ -51,9 +54,21 @@ public class PlaceService {
 		this.placeRepository.delete(place);
 	}
 
-	public Place reconstruct(final Place origin, final BindingResult bindingResult) {
-		// TODO Auto-generated method stub
-		return origin;
-	}
+	public Place reconstruct(final Place origin, final BindingResult bindingResult, final boolean edit) {
+		Place result = null;
 
+		if (!edit)
+			return origin;
+		else {
+			final Collection<Place> places = this.findAll();
+			for (final Place p : places)
+				if (origin.getAddress().equals(p.getAddress()) && origin.getGpsCoordinates().equals(p.getGpsCoordinates()))
+					result = p;
+
+		}
+
+		this.validator.validate(result, bindingResult);
+
+		return result;
+	}
 }
