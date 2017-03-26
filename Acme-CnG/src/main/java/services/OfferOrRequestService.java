@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.OfferOrRequestRepository;
+import domain.Offer;
 import domain.OfferOrRequest;
+import domain.Request;
 
 @Service
 @Transactional
@@ -63,10 +65,19 @@ public class OfferOrRequestService {
 
 	}
 
-	public Collection<OfferOrRequest> findBySearch(final String search) {
-		final Collection<OfferOrRequest> offerOrRequests = this.findAll();
-		final List<OfferOrRequest> offerOrRequestsFound = new ArrayList<OfferOrRequest>();
-		for (final OfferOrRequest offerOrRequest : offerOrRequests)
+	public Collection<Offer> findBySearchOffer(final String search) {
+		final Collection<Offer> offerOrRequests = this.offerService.findAll();
+		final List<Offer> offerOrRequestsFound = new ArrayList<Offer>();
+		for (final Offer offerOrRequest : offerOrRequests)
+			if (offerOrRequest.getTitle().contains(search) || offerOrRequest.getDescription().contains(search) || offerOrRequest.getPlace().getAddress().contains(search))
+				offerOrRequestsFound.add(offerOrRequest);
+		return offerOrRequestsFound;
+	}
+
+	public Collection<Request> findBySearchRequest(final String search) {
+		final Collection<Request> offerOrRequests = this.requestService.findAll();
+		final List<Request> offerOrRequestsFound = new ArrayList<Request>();
+		for (final Request offerOrRequest : offerOrRequests)
 			if (offerOrRequest.getTitle().contains(search) || offerOrRequest.getDescription().contains(search) || offerOrRequest.getPlace().getAddress().contains(search))
 				offerOrRequestsFound.add(offerOrRequest);
 		return offerOrRequestsFound;

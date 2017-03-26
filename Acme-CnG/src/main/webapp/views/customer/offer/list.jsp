@@ -9,7 +9,13 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
+<h1>
+	<spring:message code="search" />
+</h1>
+<form action="actor/customer/offer/search.do" method="post">
+	Search: <input type="text" name="searchText" /> <br /> <input
+		type="reset" /> <input type="submit" name="search" />
+</form>
 <display:table pagesize="5" class="displaytag" keepStatus="true" name="offers" requestURI="${requestURI}" id="row">
     <spring:message code="title" var="titleHeader"/>
     <display:column property="title" title="${titleHeader}" sortable="true"/>

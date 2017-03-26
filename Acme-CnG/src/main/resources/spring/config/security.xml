@@ -48,7 +48,9 @@
 
 		<security:intercept-url pattern="/actor/customer/offer/list.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/actor/customer/request/list.do" access="hasRole('CUSTOMER')" /> 
-
+		<security:intercept-url pattern="/actor/customer/offer/search.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/actor/customer/request/search.do" access="hasRole('CUSTOMER')" />
+		
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 

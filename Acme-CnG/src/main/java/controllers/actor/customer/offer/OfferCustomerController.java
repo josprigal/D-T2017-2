@@ -1,7 +1,6 @@
 
 package controllers.actor.customer.offer;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.OfferOrRequestService;
 import services.OfferService;
 import domain.Offer;
-import domain.OfferOrRequest;
 
 @Controller
 @RequestMapping("/actor/customer/offer")
@@ -66,16 +64,11 @@ public class OfferCustomerController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.POST, params = "search")
 	public ModelAndView search(final String searchText) {
-		final Collection<OfferOrRequest> allFound = this.offerOrRequestService.findBySearch(searchText);
-		final Collection<Offer> offers = new ArrayList<Offer>();
-		for (final OfferOrRequest o : allFound) {
-			final boolean b = o.getClass().getName().equals("Offer");
-			if (b)
-				offers.add((Offer) o);
-		}
-		final ModelAndView result = new ModelAndView("offer/list");
-		result.addObject("offers", offers);
-		result.addObject("requestURI", "/offer/search.do");
+		final Collection<Offer> allFound = this.offerOrRequestService.findBySearchOffer(searchText);
+
+		final ModelAndView result = new ModelAndView("actor/customer/offer/list");
+		result.addObject("offers", allFound);
+		result.addObject("requestURI", "actor/customer/offer/search.do");
 
 		return result;
 	}
