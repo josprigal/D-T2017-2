@@ -23,6 +23,12 @@
     <spring:message code="description" var="descriptionHeader"/>
     <display:column property="description" title="${descriptionHeader}" sortable="true"/>
     
+     <spring:message code="origin.address" var="originHeader"/>
+    <display:column property="origin.address" title="${originHeader}" sortable="true"/>
+    
+    <spring:message code="destination.address" var="destinationHeader"/>
+    <display:column property="destination.address" title="${destinationHeader}" sortable="true"/>
+    
     <spring:message code="moment" var="momentHeader"/>
     <display:column property="moment" title="${momentHeader}" sortable="true"/>
     

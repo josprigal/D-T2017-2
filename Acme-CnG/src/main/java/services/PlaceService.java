@@ -42,9 +42,10 @@ public class PlaceService {
 		return result;
 	}
 
-	public void save(final Place place) {
+	public Place save(final Place place) {
 		Assert.notNull(this.placeRepository);
-		this.placeRepository.save(place);
+
+		return this.placeRepository.save(place);
 	}
 
 	public void delete(final Place place) {

@@ -9,20 +9,18 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<h1><spring:message code="edit"/> <spring:message code="property" /> </h1>
+<h1><spring:message code="edit"/> <spring:message code="request" /> </h1>
     <form:form  modelAttribute="form" method="POST">
-        <acme:textbox path="property.name" code="name"/>
-        <form:hidden path="property.id"/>
-        <acme:textbox path="property.description" code="description"/>
-        <acme:textbox path="property.address" code="address"/>
-        <acme:textbox path="property.rate" code="rate"/>
-        <jstl:forEach items="${form.attributesValue}" var="attribute" varStatus="i">
-            <form:label path="attributesValue[${i.index}].value">
-                ${form.attributesValue[i.index].attribute.name}
-            </form:label>
-            <form:hidden path="attributesValue[${i.index}].id" />
-            <acme:textbox path="attributesValue[${i.index}].value" code="blank"/>
-            <form:hidden path="attributesValue[${i.index}].attribute" />
-        </jstl:forEach>
+        <acme:textbox path="request.title" code="title"/>
+        <form:hidden path="request.id"/>
+        <acme:textbox path="request.description" code="description"/>
+        <acme:textbox path="request.moment" code="moment"/>
+        <form:hidden path="request.banned"/>
+        <acme:textbox path="origin.address" code="origin.address"/>
+        <acme:textbox path="origin.gpsCoordinates" code="origin.gpsCoordinates"/>
+         <acme:textbox path="destination.address" code="destination.address"/>
+        <acme:textbox path="destination.gpsCoordinates" code="destination.gpsCoordinates"/>
+        
         <acme:submit name="edit" code="edit"/>
     </form:form>
+

@@ -76,12 +76,10 @@ public class OfferCustomerController {
 
 				this.placeService.save(origin);
 				this.placeService.save(destination);
-				System.out.println("hago el save");
 				final Place origin2 = this.placeService.reconstruct(origin, bindingResult, true);
 				final Place destination2 = this.placeService.reconstruct(destination, bindingResult, true);
-				offer.getPlace().add(origin2);
-				offer.getPlace().add(destination2);
-				System.out.println("TAMBIEN LLEGO");
+				offer.setOrigin(origin2);
+				offer.setDestination(destination2);
 				this.offerService.save(offer);
 				result = new ModelAndView("redirect:/actor/customer/offer/list.do");
 				return result;
