@@ -61,4 +61,16 @@ public class RequestCustomerRepository {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST, params = "search")
+	public ModelAndView search(final String searchText) {
+		final Collection<Request> allFound = this.offerOrRequestService.findBySearchRequest(searchText);
+
+		final ModelAndView result = new ModelAndView("actor/customer/request/list");
+		result.addObject("requests", allFound);
+		result.addObject("requestURI", "actor/customer/request/search.do");
+
+		return result;
+	}
+
 }
