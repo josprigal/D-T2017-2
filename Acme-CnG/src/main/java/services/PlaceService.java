@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 
 import repositories.PlaceRepository;
 import domain.Place;
@@ -48,6 +49,11 @@ public class PlaceService {
 		Assert.isTrue(place.getId() != 0);
 		Assert.isTrue(this.placeRepository.exists(place.getId()));
 		this.placeRepository.delete(place);
+	}
+
+	public Place reconstruct(final Place origin, final BindingResult bindingResult) {
+		// TODO Auto-generated method stub
+		return origin;
 	}
 
 }

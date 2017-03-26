@@ -24,12 +24,6 @@
     <spring:message code="description" var="descriptionHeader"/>
     <display:column property="description" title="${descriptionHeader}" sortable="true"/>
     
-     <spring:message code="origin" var="originHeader"/>
-    <display:column property="origin" title="${originHeader}" sortable="true"/>
-    
-     <spring:message code="destination" var="destinationHeader"/>
-    <display:column property="destination" title="${destinationHeader}" sortable="true"/>
-    
     <spring:message code="moment" var="momentHeader"/>
     <display:column property="moment" title="${momentHeader}" sortable="true"/>
 

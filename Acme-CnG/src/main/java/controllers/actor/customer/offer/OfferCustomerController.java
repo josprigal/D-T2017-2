@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.OfferOrRequestService;
 import services.OfferService;
+import services.PlaceService;
 import domain.Offer;
+import domain.Place;
 import forms.EditOfferForm;
 
 @Controller
@@ -25,6 +27,8 @@ public class OfferCustomerController {
 	private OfferService			offerService;
 	@Autowired
 	private OfferOrRequestService	offerOrRequestService;
+	@Autowired
+	private PlaceService			placeService;
 
 
 	// Listing Offer
@@ -52,33 +56,37 @@ public class OfferCustomerController {
 		return result;
 	}
 
-	@RequestMapping("/new")
+	@RequestMapping("/post")
 	public ModelAndView newGet() {
-		return this.createNewView(new Offer());
+		return this.createNewView(new Offer(), new Place(), new Place());
 	}
 
-	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/post", method = RequestMethod.POST)
 	public ModelAndView createPost(@ModelAttribute("form") final EditOfferForm editOfferForm, final BindingResult bindingResult) {
 		final Offer offer = this.offerService.reconstruct(editOfferForm.getOffer(), bindingResult);
+		final Place origin = this.placeService.reconstruct(editOfferForm.getOrigin(), bindingResult);
+		final Place destination = this.placeService.reconstruct(editOfferForm.getDestination(), bindingResult);
 		ModelAndView result;
 		if (bindingResult.hasErrors())
-			return this.createNewView(offer);
+			return this.createNewView(offer, origin, destination);
 		else
 			try {
 				this.offerService.save(offer);
-				result = new ModelAndView("redirect:/actor/lessor/offer/list.do");
+				result = new ModelAndView("redirect:/actor/customer/offer/list.do");
 				return result;
 			} catch (final Throwable oops) {
-				return this.createNewView(offer);
+				return this.createNewView(offer, origin, destination);
 			}
 	}
 
-	private ModelAndView createNewView(final Offer offer) {
+	private ModelAndView createNewView(final Offer offer, final Place origin, final Place destination) {
 		Assert.notNull(offer);
 
-		final ModelAndView result = new ModelAndView("actor/customer/offer/edit");
+		final ModelAndView result = new ModelAndView("actor/customer/offer/post");
 		final EditOfferForm editOfferForm = new EditOfferForm();
 		editOfferForm.setOffer(offer);
+		editOfferForm.setOrigin(origin);
+		editOfferForm.setDestination(origin);
 		result.addObject("form", editOfferForm);
 
 		return result;
