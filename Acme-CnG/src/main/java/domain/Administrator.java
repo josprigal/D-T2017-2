@@ -23,13 +23,5 @@ public class Administrator extends Actor {
 	private Collection<Banner>	banner;
 
 
-	@OneToMany()
-	public Collection<Banner> getBanner() {
-		return this.banner;
-	}
-
-	public void setBanner(final Collection<Banner> banner) {
-		this.banner = banner;
-	}
 
 }

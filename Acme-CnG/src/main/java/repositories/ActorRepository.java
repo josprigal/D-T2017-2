@@ -18,27 +18,27 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	@Query("select avg(c.comments.size) from Actor c")
 	Double avgCommensPerActor();
 
-	@Query("select min(c.messagesSent) from Actor c")
+	@Query("select min(c.messagesSent.size) from Actor c")
 	Integer minMessagesSentPerActor();
 
-	@Query("select max(c.messagesSent) from Actor c")
+	@Query("select max(c.messagesSent.size) from Actor c")
 	Integer maxMessagesSentPerActor();
 
-	@Query("select avg(c.messagesSent) from Actor c")
+	@Query("select avg(c.messagesSent.size) from Actor c")
 	Double avgMessagesSentPerActor();
 
-	@Query("select min(c.messagesReceived) from Actor c")
+	@Query("select min(c.messagesReceived.size) from Actor c")
 	Integer minMessagesReceivedPerActor();
 
-	@Query("select max(c.messagesReceived) from Actor c")
+	@Query("select max(c.messagesReceived.size) from Actor c")
 	Integer maxMessagesReceivedPerActor();
 
-	@Query("select avg(c.messagesReceived) from Actor c")
+	@Query("select avg(c.messagesReceived.size) from Actor c")
 	Double avgMessagesReceivedPerActor();
 
-	@Query("select c from Actor c where c.messages.size=(select max(a.messages.size)from Actor a)")
+	@Query("select c from Actor c where c.messagesReceived.size=(select max(a.messagesReceived.size)from Actor a)")
 	Collection<Actor> actorHasMoreMessages();
 
-	@Query("select c from Actor c where c.messagesSent=(select max(a.messagesSent)from Actor a)")
+	@Query("select c from Actor c where c.messagesSent.size=(select max(a.messagesSent.size)from Actor a)")
 	Collection<Actor> actorSentMoreMessages();
 }

@@ -69,7 +69,9 @@ public class OfferOrRequestService {
 		final Collection<Offer> offerOrRequests = this.offerService.findAll();
 		final List<Offer> offerOrRequestsFound = new ArrayList<Offer>();
 		for (final Offer offerOrRequest : offerOrRequests)
-			if (offerOrRequest.getTitle().contains(search) || offerOrRequest.getDescription().contains(search) || offerOrRequest.getPlace().toString().contains(search))
+			if (offerOrRequest.getTitle().contains(search) || offerOrRequest.getDescription().contains(search) ||
+					offerOrRequest.getDestination().getAddress().contains(search) ||
+					offerOrRequest.getOrigin().getAddress().contains(search))
 				offerOrRequestsFound.add(offerOrRequest);
 		return offerOrRequestsFound;
 	}
@@ -78,7 +80,9 @@ public class OfferOrRequestService {
 		final Collection<Request> offerOrRequests = this.requestService.findAll();
 		final List<Request> offerOrRequestsFound = new ArrayList<Request>();
 		for (final Request offerOrRequest : offerOrRequests)
-			if (offerOrRequest.getTitle().contains(search) || offerOrRequest.getDescription().contains(search) || offerOrRequest.getPlace().toString().contains(search))
+			if (offerOrRequest.getTitle().contains(search) || offerOrRequest.getDescription().contains(search) ||
+					offerOrRequest.getDestination().getAddress().contains(search) ||
+					offerOrRequest.getOrigin().getAddress().contains(search))
 				offerOrRequestsFound.add(offerOrRequest);
 		return offerOrRequestsFound;
 	}

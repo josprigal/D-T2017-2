@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 
 import repositories.RequestRepository;
 import domain.Request;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -64,4 +65,10 @@ public class RequestService {
 
 		return offer;
 	}
+    public void banRequest(Request request) {
+		Assert.isTrue(LoginService.hasRole("ADMIN"));
+		request.setBanned(true);
+
+		save(request);
+    }
 }

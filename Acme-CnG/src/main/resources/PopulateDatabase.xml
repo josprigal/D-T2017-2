@@ -116,22 +116,9 @@
 
 	<bean id="banner1" class="domain.Banner">
 		<property name="image"
-			value="https://pbs.twimg.com/profile_images/797215075941498880/XsJG_XtV.jpg" />
+			value="http://i.imgur.com/12eM8tB.png" />
 
 	</bean>
-
-	<bean id="banner2" class="domain.Banner">
-		<property name="image"
-			value="https://pbs.twimg.com/profile_images/616302016806133761/laypFc93.png" />
-
-	</bean>
-
-	<bean id="banner3" class="domain.Banner">
-		<property name="image"
-			value="http://gallery.yopriceville.com/var/albums/Free-Clipart-Pictures/Ribbons-and-Banners-PNG/Decorative_Banner_Transparent_PNG_Picture.png?m=1412430660" />
-
-	</bean>
-
 	<bean id="offer1" class="domain.Offer">
 
 		<property name="title" value="Offer 1" />
@@ -139,13 +126,8 @@
 		<property name="moment" value="10/10/2015" />
 		<property name="banned" value="true" />
 		<property name="customer" ref="customer1" />
-		<property name="place">
-			<list>
-
-				<ref bean="place1" />
-				<ref bean="place2" />
-			</list>
-		</property>
+        <property name="origin" ref="place3" />
+        <property name="destination" ref="place8" />
 		<property name="comments">
 			<list>
 
@@ -167,13 +149,8 @@
 		<property name="description" value="Desc 2" />
 		<property name="moment" value="10/10/2016" />
 		<property name="banned" value="false" />
-		<property name="place">
-			<list>
-
-				<ref bean="place3" />
-				<ref bean="place4" />
-			</list>
-		</property>
+            <property name="origin" ref="place4" />
+            <property name="destination" ref="place5" />
 		<property name="comments">
 			<list>
 
@@ -197,13 +174,8 @@
 		<property name="description" value="Desc 1" />
 		<property name="moment" value="10/10/2015" />
 		<property name="banned" value="true" />
-		<property name="place">
-			<list>
-
-				<ref bean="place5" />
-				<ref bean="place6" />
-			</list>
-		</property>
+            <property name="origin" ref="place1" />
+            <property name="destination" ref="place2" />
 		<property name="customer" ref="customer1" />
 		<property name="applications">
 			<list>
@@ -220,13 +192,8 @@
 		<property name="description" value="Desc 2" />
 		<property name="moment" value="11/11/2016" />
 		<property name="banned" value="false" />
-		<property name="place">
-			<list>
-
-				<ref bean="place7" />
-				<ref bean="place8" />
-			</list>
-		</property>
+        <property name="origin" ref="place7" />
+        <property name="destination" ref="place8" />
 		<property name="comments">
 			<list>
 
@@ -287,10 +254,10 @@
 
 		<property name="title" value="Message 1" />
 		<property name="sent" value="10/10/2013" />
-		<property name="sender" value="customer1" />
+		<property name="sender" ref="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-		<property name="actor" ref="customer1" />
+		<property name="receiver" ref="administrator1" />
 		
 	</bean>
 	
@@ -298,28 +265,26 @@
 
 		<property name="title" value="Message 2" />
 		<property name="sent" value="10/10/2013" />
-		<property name="sender" value="customer1" />
+		<property name="sender" ref="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-		<property name="actor" ref="customer1" />
+        <property name="receiver" ref="administrator1" />
 	</bean>
 <bean id="message3" class="domain.Message">
 
 		<property name="title" value="Message 3" />
 		<property name="sent" value="10/10/2013" />
-		<property name="sender" value="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-		<property name="actor" ref="administrator2" />
 	</bean>
 <bean id="message4" class="domain.Message">
 
 		<property name="title" value="Message 4" />
 		<property name="sent" value="10/10/2013" />
-		<property name="sender" value="customer1" />
+		<property name="sender" ref="customer1" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-		<property name="actor" ref="administrator1" />
+		<property name="receiver" ref="administrator1" />
 	</bean>
 	<bean id="administrator1" class="domain.Administrator">
 
@@ -327,19 +292,6 @@
 		<property name="email" value="admin@super.es" />
 		<property name="phone" value="975398899" />
 		<property name="userAccount" ref="userAccount1" />
-		<property name="messages">
-			<list>
-
-				<ref bean="message4" />
-		
-			</list>
-		</property>
-		<property name="banner">
-			<list>
-
-				<ref bean="banner1" />
-			</list>
-		</property>
 		<property name="comments">
 			<list>
 
@@ -354,19 +306,6 @@
 		<property name="email" value="admin@super.es" />
 		<property name="phone" value="975398899" />
 		<property name="userAccount" ref="userAccount2" />
-		<property name="messages">
-			<list>
-
-				<ref bean="message3" />
-				
-			</list>
-		</property>
-		<property name="banner">
-			<list>
-
-				<ref bean="banner2" />
-			</list>
-		</property>
 	</bean>
 <bean id="customer1" class="domain.Customer">
 
@@ -374,13 +313,6 @@
 		<property name="email" value="customer@super.es" />
 		<property name="phone" value="975398899" />
 		<property name="userAccount" ref="userAccount3" />
-		<property name="messages">
-			<list>
-
-				<ref bean="message1" />
-				<ref bean="message2" />
-			</list>
-		</property>
 		<property name="offerOrRequests">
 			<list>
 

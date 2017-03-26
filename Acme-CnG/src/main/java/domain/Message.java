@@ -19,26 +19,17 @@ public class Message extends DomainEntity {
 
 	public Message() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.sent = new Date();
 	}
 
 
-	private String	sender;
 	private Date	sent;
 	private String	title;
 	private String	text;
 	private String	attachments;
 
 
-	@NotBlank
-	public String getSender() {
-		return this.sender;
-	}
 
-	public void setSender(final String sender) {
-		this.sender = sender;
-	}
 
 	@NotNull
 	@Past
@@ -76,16 +67,24 @@ public class Message extends DomainEntity {
 	}
 
 
-	private Actor	actor;
+	private Actor sender;
+	private Actor receiver;
 
-
-	@ManyToOne()
-	public Actor getActor() {
-		return this.actor;
+	@ManyToOne
+	public Actor getReceiver() {
+		return receiver;
 	}
 
-	public void setActor(final Actor actor) {
-		this.actor = actor;
+	public void setReceiver(Actor receiver) {
+		this.receiver = receiver;
 	}
 
+	@ManyToOne
+	public Actor getSender() {
+		return sender;
+	}
+
+	public void setSender(Actor sender) {
+		this.sender = sender;
+	}
 }

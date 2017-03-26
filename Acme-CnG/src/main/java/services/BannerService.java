@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.BannerRepository;
 import domain.Banner;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -18,13 +20,16 @@ public class BannerService {
 	@Autowired
 	BannerRepository	bannerRepository;
 
+	@Autowired
+	ActorService actorService;
+
 
 	public BannerService() {
 		super();
 	}
 
-	public Collection<Banner> findAll() {
-		Collection<Banner> result;
+	public List<Banner> findAll() {
+		List<Banner> result;
 		result = this.bannerRepository.findAll();
 		Assert.notNull(result);
 		return result;
@@ -38,9 +43,9 @@ public class BannerService {
 		return result;
 	}
 
-	public void save(final Banner banner) {
+	public Banner save(final Banner banner) {
 		Assert.notNull(this.bannerRepository);
-		this.bannerRepository.save(banner);
+		return this.bannerRepository.save(banner);
 	}
 
 	public void delete(final Banner banner) {
@@ -50,4 +55,14 @@ public class BannerService {
 		this.bannerRepository.delete(banner);
 	}
 
+	public Banner getPrincipal(){
+		return bannerRepository.findAll().get(0);
+	}
+
+    public Banner changeBanner(String image) {
+		Assert.isTrue(LoginService.hasRole("ADMIN"));
+		Banner banner = getPrincipal();
+		banner.setImage(image);
+		return save(banner);
+    }
 }

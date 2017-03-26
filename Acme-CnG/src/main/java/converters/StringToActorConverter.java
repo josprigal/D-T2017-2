@@ -26,11 +26,7 @@ public class StringToActorConverter implements Converter<String, Actor> {
 
 			result = (Actor) Class.forName(text).newInstance();
 
-		} catch (final InstantiationException e) {
-
-			e.printStackTrace();
-
-		} catch (final IllegalAccessException e) {
+		} catch (final InstantiationException | IllegalAccessException e) {
 
 			e.printStackTrace();
 

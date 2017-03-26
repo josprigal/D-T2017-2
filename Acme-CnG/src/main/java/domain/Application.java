@@ -18,7 +18,6 @@ public class Application extends DomainEntity {
 
 	private String	type;
 
-
 	@NotBlank
 	public String getType() {
 		return this.type;

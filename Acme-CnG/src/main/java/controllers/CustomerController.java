@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,14 +40,18 @@ public class CustomerController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
 	public ModelAndView create(
-			@ModelAttribute("customer") @Valid final Customer customer,
+			@ModelAttribute("customer") final Customer customer,
 			final BindingResult binding) {
 
 		ModelAndView result;
-
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(customer, "wrong");
-		else
+		if (binding.hasErrors()) {
+            for (ObjectError e : binding.getAllErrors()) {
+                System.out.println(e.getDefaultMessage());
+                System.out.println(e.getObjectName());
+                System.out.println(e.getCodes());
+            }
+            result = this.createEditModelAndView(customer, "wrong");
+        }else
 			try {
 
 				final Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
@@ -71,6 +76,7 @@ public class CustomerController {
 					SecurityContextHolder.getContext().setAuthentication(auth);
 				result = new ModelAndView("redirect:../");
 			} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
 				result = this.createEditModelAndView(customer, "wrong");
 			}
 

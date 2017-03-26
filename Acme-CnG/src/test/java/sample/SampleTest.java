@@ -14,10 +14,12 @@ import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import services.RequestService;
 import utilities.AbstractTest;
 
 @ContextConfiguration(locations = {
@@ -26,6 +28,9 @@ import utilities.AbstractTest;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class SampleTest extends AbstractTest {
+
+    @Autowired
+    private RequestService requestService;
 
 	// System under test ------------------------------------------------------
 
@@ -37,7 +42,7 @@ public class SampleTest extends AbstractTest {
 
 	@Test
 	public void samplePositiveTest() {
-		Assert.isTrue(true);
+		requestService.findAll();
 	}
 
 	@Test(expected = IllegalArgumentException.class)

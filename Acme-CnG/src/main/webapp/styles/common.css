@@ -17,3 +17,11 @@
 	color: red;
 	font-weight: bolder;
 }
+
+.button{
+	padding:7px;
+	background-color: rgb(215, 75, 71);
+	color:white;
+	border-radius:4pt;
+    text-decoration: none;
+}

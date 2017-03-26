@@ -28,9 +28,10 @@ public class Actor extends DomainEntity {
 
 	public Actor() {
 		super();
-		this.messages = new ArrayList<Message>();
+		this.messagesReceived = new ArrayList<>();
+		this.messagesSent = new ArrayList<>();
 		this.comments = new ArrayList<Comment>();
-		this.application = new ArrayList<Application>();
+		this.applications = new ArrayList<Application>();
 	}
 
 	@NotBlank
@@ -62,19 +63,12 @@ public class Actor extends DomainEntity {
 	}
 
 
-	private Collection<Message>		messages;
+	private Collection<Message> messagesReceived;
+	private Collection<Message> messagesSent;
 	private Collection<Comment>		comments;
-	private Collection<Application>	application;
+	private Collection<Application>	applications;
 
 
-	@OneToMany(mappedBy = "actor")
-	public Collection<Message> getMessages() {
-		return this.messages;
-	}
-
-	public void setMessages(final Collection<Message> messages) {
-		this.messages = messages;
-	}
 
 	@OneToMany(mappedBy = "actor")
 	public Collection<Comment> getComments() {
@@ -87,11 +81,11 @@ public class Actor extends DomainEntity {
 
 	@OneToMany()
 	public Collection<Application> getApplications() {
-		return this.application;
+		return this.applications;
 	}
 
-	public void setApplications(final Collection<Application> application) {
-		this.application = application;
+	public void setApplications(final Collection<Application> applications) {
+		this.applications = applications;
 	}
 
 
@@ -108,23 +102,35 @@ public class Actor extends DomainEntity {
 		this.userAccount = userAccount;
 	}
 
-	public Integer getMessagesSent() {
-		int i = 0;
-		for (final Message m : this.messages)
-			if (m.getSender().equalsIgnoreCase(this.getName()))
-				i++;
-		return i;
-	}
-	public void setMessagesSent(final Integer i) {
-	}
-	public Integer getMessagesReceived() {
-		int i = 0;
-		for (final Message m : this.messages)
-			if (m.getActor().getName().equalsIgnoreCase(this.getName()))
-				i++;
-		return i;
-	}
-	public void setMessagesReceived(final Integer i) {
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+	public Collection<Message> getMessagesReceived() {
+		return messagesReceived;
 	}
 
+	public void setMessagesReceived(Collection<Message> messagesReceived) {
+		this.messagesReceived = messagesReceived;
+	}
+
+	@OneToMany(mappedBy = "sender",cascade = CascadeType.ALL)
+	public Collection<Message> getMessagesSent() {
+		return messagesSent;
+	}
+
+	public void setMessagesSent(Collection<Message> messagesSent) {
+		this.messagesSent = messagesSent;
+	}
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", messagesReceived=" + messagesReceived +
+                ", messagesSent=" + messagesSent +
+                ", comments=" + comments +
+                ", applications=" + applications +
+                ", userAccount=" + userAccount +
+                '}';
+    }
 }

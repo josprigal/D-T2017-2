@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import sun.rmi.runtime.Log;
 
 @Service
 @Transactional
@@ -71,6 +72,14 @@ public class LoginService implements UserDetailsService {
 		Assert.isTrue(result.getId() != 0);
 
 		return result;
+	}
+
+	public static boolean hasRole(String rol){
+		Authority authority = new Authority();
+		authority.setAuthority(rol);
+		UserAccount userAccount = LoginService.getPrincipal();
+
+		return userAccount.getAuthorities().contains(authority);
 	}
 
 }

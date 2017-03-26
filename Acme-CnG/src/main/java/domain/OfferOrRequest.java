@@ -5,12 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -72,20 +67,13 @@ public class OfferOrRequest extends DomainEntity {
 	}
 
 
-	private Collection<Place>		place;
+	private Place origin;
+	private Place destination;
 	private Collection<Comment>		comments;
 	private Collection<Application>	applications;
 	private Customer				customer;
 
 
-	@OneToMany
-	public Collection<Place> getPlace() {
-		return this.place;
-	}
-
-	public void setPlace(final Collection<Place> place) {
-		this.place = place;
-	}
 
 	@OneToMany(mappedBy = "offerOrRequest")
 	public Collection<Comment> getComments() {
@@ -113,4 +101,21 @@ public class OfferOrRequest extends DomainEntity {
 		this.applications = applications;
 	}
 
+	@OneToOne
+	public Place getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(Place origin) {
+		this.origin = origin;
+	}
+
+	@OneToOne
+	public Place getDestination() {
+		return destination;
+	}
+
+	public void setDestination(Place destination) {
+		this.destination = destination;
+	}
 }

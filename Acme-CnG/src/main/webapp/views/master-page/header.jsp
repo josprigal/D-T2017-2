@@ -13,9 +13,6 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<div>
-	<img src="images/logo.png" alt="Sample Co., Inc." />
-</div>
 
 <div>
 	<ul id="jMenu">
@@ -24,19 +21,21 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
-									
+                    <li><a href="administrator/changeBanner.do"><spring:message code="master.page.administrator.changeBanner" /></a></li>
+                    <li><a href="administrator/banrequest.do"><spring:message code="master.page.administrator.banrequest" /></a></li>
+					<li><a href="actor/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+
 				</ul>
 			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				
+
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="actor/customer/offer/list.do"><spring:message code="master.page.customer.offer" /></a></li>
-					<li><a href="actor/customer/request/list.do"><spring:message code="master.page.customer.request" /></a></li>			
+					<li><a href="actor/customer/request/list.do"><spring:message code="master.page.customer.request" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -53,10 +52,10 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-<%-- 				<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>				 --%>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
+
 		</security:authorize>
 	</ul>
 </div>

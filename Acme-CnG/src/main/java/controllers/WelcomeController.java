@@ -13,16 +13,19 @@ package controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import repositories.BannerRepository;
 
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
 
-	// Constructors -----------------------------------------------------------
+	@Autowired
+	private BannerRepository bannerRepository;
 	
 	public WelcomeController() {
 		super();
@@ -42,6 +45,8 @@ public class WelcomeController extends AbstractController {
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
 		result.addObject("moment", moment);
+		result.addObject("banner",bannerRepository.findAll().get(0).getImage()
+        );
 
 		return result;
 	}

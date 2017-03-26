@@ -104,6 +104,8 @@ public class DashboardAdministratorController extends AbstractController {
 		result.addObject("actorHasMoreMessages", actorHasMoreMessages);
 		result.addObject("actorSentMoreMessages", actorSentMoreMessages);
 
+		result.addObject("requestURI","actor/administrator/dashboard.do");
+
 		return result;
 	}
 
