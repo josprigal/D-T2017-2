@@ -10,7 +10,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<display:table pagesize="5" class="displaytag" keepStatus="true" name="requests" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" keepStatus="true" name="offers" requestURI="${requestURI}" id="row">
     <spring:message code="title" var="titleHeader"/>
     <display:column property="title" title="${titleHeader}" sortable="true"/>
 

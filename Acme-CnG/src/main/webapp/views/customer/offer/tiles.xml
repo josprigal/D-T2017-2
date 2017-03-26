@@ -16,12 +16,12 @@
        
 <tiles-definitions>
 
-	<definition name="customer/request/list" extends="master.page">	
+	<definition name="actor/customer/offer/list" extends="master.page">	
 		<put-attribute name="title" value="Offers" />
 		<put-attribute name="body" value="/views/customer/offer/list.jsp" />
 	</definition>
 	
-	<definition name="customer/request/post" extends="master.page">	
+	<definition name="actor/customer/offer/post" extends="master.page">	
 		<put-attribute name="title" value="Offer: Post" />
 		<put-attribute name="body" value="/views/customer/offer/edit.jsp" />
 	</definition>
