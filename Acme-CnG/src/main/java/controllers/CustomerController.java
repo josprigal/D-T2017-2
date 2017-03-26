@@ -39,7 +39,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
 	public ModelAndView create(
-			@ModelAttribute("user") @Valid final Customer customer,
+			@ModelAttribute("customer") @Valid final Customer customer,
 			final BindingResult binding) {
 
 		ModelAndView result;
