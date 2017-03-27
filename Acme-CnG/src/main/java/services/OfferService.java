@@ -43,9 +43,10 @@ public class OfferService {
 		return result;
 	}
 
-	public void save(final Offer offer) {
+	public Offer save(final Offer offer) {
 		Assert.notNull(this.offerRepository);
-		this.offerRepository.save(offer);
+		final Offer o = this.offerRepository.save(offer);
+		return o;
 	}
 
 	public void delete(final Offer offer) {

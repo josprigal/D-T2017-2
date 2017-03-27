@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Actor;
 
 @Service
@@ -106,6 +108,10 @@ public class ActorService {
 	public Collection<Actor> actorSentMoreMessages() {
 		// TODO Auto-generated method stub
 		return this.actorRepository.actorSentMoreMessages();
+	}
+	public Actor findActorByPrincipal() {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		return this.actorRepository.findByUserAccountId(userAccount.getId());
 	}
 
 }

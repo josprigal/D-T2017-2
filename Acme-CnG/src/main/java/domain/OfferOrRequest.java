@@ -5,7 +5,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -19,6 +25,7 @@ public class OfferOrRequest extends DomainEntity {
 		super();
 		this.comments = new ArrayList<Comment>();
 		this.applications = new ArrayList<Application>();
+		this.banned = false;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -67,12 +74,11 @@ public class OfferOrRequest extends DomainEntity {
 	}
 
 
-	private Place origin;
-	private Place destination;
+	private Place					origin;
+	private Place					destination;
 	private Collection<Comment>		comments;
 	private Collection<Application>	applications;
 	private Customer				customer;
-
 
 
 	@OneToMany(mappedBy = "offerOrRequest")
@@ -103,19 +109,19 @@ public class OfferOrRequest extends DomainEntity {
 
 	@OneToOne
 	public Place getOrigin() {
-		return origin;
+		return this.origin;
 	}
 
-	public void setOrigin(Place origin) {
+	public void setOrigin(final Place origin) {
 		this.origin = origin;
 	}
 
 	@OneToOne
 	public Place getDestination() {
-		return destination;
+		return this.destination;
 	}
 
-	public void setDestination(Place destination) {
+	public void setDestination(final Place destination) {
 		this.destination = destination;
 	}
 }
