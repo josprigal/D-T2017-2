@@ -12,14 +12,21 @@
 <h1><spring:message code="edit"/> <spring:message code="request" /> </h1>
     <form:form  modelAttribute="form" method="POST">
         <acme:textbox path="request.title" code="title"/>
+        <form:errors cssClass="error" path="request.title" />
         <form:hidden path="request.id"/>
         <acme:textbox path="request.description" code="description"/>
+        <form:errors cssClass="error" path="request.description" />
         <acme:textbox path="request.moment" code="moment"/>
+        <form:errors cssClass="error" path="request.moment" />
         <form:hidden path="request.banned"/>
         <acme:textbox path="origin.address" code="origin.address"/>
+        <form:errors cssClass="error" path="origin.address" />
         <acme:textbox path="origin.gpsCoordinates" code="origin.gpsCoordinates"/>
+        <form:errors cssClass="error" path="origin.gpsCoordinates" />
          <acme:textbox path="destination.address" code="destination.address"/>
+         <form:errors cssClass="error" path="destination.address" />
         <acme:textbox path="destination.gpsCoordinates" code="destination.gpsCoordinates"/>
+        <form:errors cssClass="error" path="destination.gpsCoordinates" />
         
         <acme:submit name="edit" code="edit"/>
     </form:form>

@@ -84,7 +84,7 @@ public class OfferCustomerController {
 				result = new ModelAndView("redirect:/actor/customer/offer/list.do");
 				return result;
 			} catch (final Throwable oops) {
-				return this.createNewView(offer, origin, destination);
+				return this.createNewView(offer, origin, destination, "offer.commit.error");
 			}
 	}
 
@@ -97,6 +97,18 @@ public class OfferCustomerController {
 		editOfferForm.setOrigin(origin);
 		editOfferForm.setDestination(origin);
 		result.addObject("form", editOfferForm);
+
+		return result;
+	}
+
+	private ModelAndView createNewView(final Offer offer, final Place origin, final Place destination, final String message) {
+		final ModelAndView result = new ModelAndView("actor/customer/offer/post");
+		final EditOfferForm editOfferForm = new EditOfferForm();
+		editOfferForm.setOffer(offer);
+		editOfferForm.setOrigin(origin);
+		editOfferForm.setDestination(origin);
+		result.addObject("form", editOfferForm);
+		result.addObject("message", message);
 
 		return result;
 	}

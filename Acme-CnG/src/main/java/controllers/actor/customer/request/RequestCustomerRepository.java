@@ -90,8 +90,6 @@ public class RequestCustomerRepository {
 		final Request request = this.requestService.reconstruct(editRequestForm.getRequest(), bindingResult);
 		final Place origin = this.placeService.reconstruct(editRequestForm.getOrigin(), bindingResult, false);
 		final Place destination = this.placeService.reconstruct(editRequestForm.getDestination(), bindingResult, false);
-		System.out.println(origin);
-		System.out.println(destination);
 		ModelAndView result;
 		if (bindingResult.hasErrors())
 			return this.createNewView(request, origin, destination);
@@ -108,7 +106,8 @@ public class RequestCustomerRepository {
 				result = new ModelAndView("redirect:/actor/customer/request/list.do");
 				return result;
 			} catch (final Throwable oops) {
-				return this.createNewView(request, origin, destination);
+
+				return this.createNewView(request, origin, destination, "request.commit.error");
 			}
 	}
 
@@ -121,6 +120,17 @@ public class RequestCustomerRepository {
 		editRequestForm.setOrigin(origin);
 		editRequestForm.setDestination(origin);
 		result.addObject("form", editRequestForm);
+
+		return result;
+	}
+	private ModelAndView createNewView(final Request request, final Place origin, final Place destination, final String message) {
+		final ModelAndView result = new ModelAndView("actor/customer/request/post");
+		final EditRequestForm editRequestForm = new EditRequestForm();
+		editRequestForm.setRequest(request);
+		editRequestForm.setOrigin(origin);
+		editRequestForm.setDestination(origin);
+		result.addObject("form", editRequestForm);
+		result.addObject("message", message);
 
 		return result;
 	}

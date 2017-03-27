@@ -1,6 +1,5 @@
-package controllers;
 
-import javax.validation.Valid;
+package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,13 +24,14 @@ import domain.Customer;
 public class CustomerController {
 
 	@Autowired
-	ActorService actorService;
+	ActorService		actorService;
 
 	@Autowired
-	CustomerService customerService;
+	CustomerService		customerService;
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	UserDetailsService	userDetailsService;
+
 
 	@RequestMapping(value = "/register")
 	public ModelAndView index() {
@@ -39,19 +39,17 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
-	public ModelAndView create(
-			@ModelAttribute("customer") final Customer customer,
-			final BindingResult binding) {
+	public ModelAndView create(@ModelAttribute("customer") final Customer customer, final BindingResult binding) {
 
 		ModelAndView result;
 		if (binding.hasErrors()) {
-            for (ObjectError e : binding.getAllErrors()) {
-                System.out.println(e.getDefaultMessage());
-                System.out.println(e.getObjectName());
-                System.out.println(e.getCodes());
-            }
-            result = this.createEditModelAndView(customer, "wrong");
-        }else
+			for (final ObjectError e : binding.getAllErrors()) {
+				System.out.println(e.getDefaultMessage());
+				System.out.println(e.getObjectName());
+				System.out.println(e.getCodes());
+			}
+			result = this.createEditModelAndView(customer, "wrong");
+		} else
 			try {
 
 				final Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
@@ -62,21 +60,18 @@ public class CustomerController {
 
 				this.customerService.create(customer);
 
-				final UserDetails userDetails = this.userDetailsService
-						.loadUserByUsername(customer.getUserAccount()
-								.getUsername());
+				final UserDetails userDetails = this.userDetailsService.loadUserByUsername(customer.getUserAccount().getUsername());
 
 				final UsernamePasswordAuthenticationToken auth =
 
-				new UsernamePasswordAuthenticationToken(userDetails, customer
-						.getUserAccount().getPassword(),
+				new UsernamePasswordAuthenticationToken(userDetails, customer.getUserAccount().getPassword(),
 
 				userDetails.getAuthorities());
 				if (auth.isAuthenticated())
 					SecurityContextHolder.getContext().setAuthentication(auth);
 				result = new ModelAndView("redirect:../");
 			} catch (final Throwable oops) {
-			System.out.println(oops.getMessage());
+				System.out.println(oops.getMessage());
 				result = this.createEditModelAndView(customer, "wrong");
 			}
 
@@ -84,8 +79,7 @@ public class CustomerController {
 
 	}
 
-	protected ModelAndView createEditModelAndView(final Customer customer,
-			final String message) {
+	protected ModelAndView createEditModelAndView(final Customer customer, final String message) {
 
 		ModelAndView result;
 		result = new ModelAndView("customer/register");
