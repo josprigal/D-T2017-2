@@ -32,6 +32,13 @@
     
     <spring:message code="moment" var="momentHeader"/>
     <display:column property="moment" title="${momentHeader}" sortable="true"/>
+    
+    <spring:message code="edit" var="editHeader"/>
+    <display:column title="${editHeader }">
+			<a href="actor/comment/r/${row.id}/new.do">
+				<spring:message	code="edit" />
+			</a>
+	</display:column>	
 
 </display:table>
 
