@@ -54,6 +54,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testPostOffer() {
 		//Postear un offer normal
 		super.authenticate("customer");
+		final int size1 = this.offerService.findAll().size();//Listing
 		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
@@ -69,11 +70,14 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
+		final int size2 = this.offerService.findAll().size();
+
 		Assert.notNull(ores.getTitle());
 		Assert.notNull(ores.getDescription());
 		Assert.notNull(ores.getMoment());
 		Assert.isTrue(ores.getTitle() != "");
 		Assert.isTrue(ores.getDescription() != "");
+		Assert.isTrue(size1 < size2);
 		Assert.notNull(c);
 
 		this.unauthenticate();
@@ -84,6 +88,8 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		super.authenticate("customer");
 
 		final Customer c = this.customerService.findByPrincipal();
+		final int size1 = this.offerService.findAll().size(); //Listing
+
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
@@ -98,12 +104,15 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
+		final int size2 = this.offerService.findAll().size();
+
 		Assert.notNull(ores.getTitle());
 		Assert.notNull(ores.getDescription());
 		Assert.notNull(ores.getMoment());
 		Assert.notNull(c);
 		Assert.isTrue(ores.getTitle() != "");
 		Assert.isTrue(ores.getDescription() != "");
+		Assert.isTrue(size1 < size2);
 
 		this.unauthenticate();
 	}
