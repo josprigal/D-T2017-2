@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Administrator;
 
 @Service
@@ -53,6 +55,10 @@ public class AdministratorService {
 	public Double avgCommensPerAdmin() {
 		// TODO Auto-generated method stub
 		return this.administratorRepository.avgCommensPerAdministrator();
+	}
+	public Administrator findByPrincipal() {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		return this.administratorRepository.findByUserAccountId(userAccount.getId());
 	}
 
 }

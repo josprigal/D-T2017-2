@@ -12,6 +12,8 @@ import org.springframework.util.Assert;
 
 import repositories.CustomerRepository;
 import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import domain.Application;
 import domain.Customer;
 
@@ -104,6 +106,13 @@ public class CustomerService {
 			if (a.getType().equalsIgnoreCase(state))
 				i++;
 		return i;
+	}
+	public Customer findByPrincipal() {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		return this.customerRepository.findByUserAccountId(userAccount.getId());
+	}
+	public Customer findByUserAccountName(final String userAccount) {
+		return this.customerRepository.findByUserAccountName(userAccount);
 	}
 
 }

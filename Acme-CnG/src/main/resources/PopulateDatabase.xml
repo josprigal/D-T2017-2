@@ -305,14 +305,14 @@
 		<property name="name" value="Admin 2" />
 		<property name="email" value="admin@super.es" />
 		<property name="phone" value="975398899" />
-		<property name="userAccount" ref="userAccount2" />
+		<property name="userAccount" ref="userAccount3" />
 	</bean>
 <bean id="customer1" class="domain.Customer">
 
 		<property name="name" value="Customer 1" />
 		<property name="email" value="customer@super.es" />
 		<property name="phone" value="975398899" />
-		<property name="userAccount" ref="userAccount3" />
+		<property name="userAccount" ref="userAccount2" />
 		<property name="offerOrRequests">
 			<list>
 

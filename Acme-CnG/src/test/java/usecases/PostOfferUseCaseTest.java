@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import services.ActorService;
+import services.AdministratorService;
 import services.CustomerService;
 import services.OfferService;
 import services.PlaceService;
@@ -28,16 +29,19 @@ import domain.Place;
 public class PostOfferUseCaseTest extends AbstractTest {
 
 	@Autowired
-	ActorService	actorService;
+	ActorService			actorService;
 
 	@Autowired
-	CustomerService	customerService;
+	CustomerService			customerService;
 
 	@Autowired
-	OfferService	offerService;
+	AdministratorService	administratorService;
 
 	@Autowired
-	PlaceService	placeService;
+	OfferService			offerService;
+
+	@Autowired
+	PlaceService			placeService;
 
 
 	/*
@@ -50,7 +54,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testPostOffer() {
 		//Postear un offer normal
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
@@ -65,7 +69,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.notNull(c);
 
 		this.unauthenticate();
 	}
@@ -73,7 +82,8 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testPostOffer2() {
 		//Postear un offer con comienzo baneeado (esto no se podria hacer desde el controller habria que banearlo posteriormente)
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
@@ -88,15 +98,20 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.notNull(c);
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
 
 		this.unauthenticate();
 	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public void testNoAuthenticated() {
 		//Intentar postear un offer sin estar autenticado
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		this.authenticate(null);
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
@@ -111,20 +126,24 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
-
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.notNull(c);
+		this.unauthenticate();
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testAsAdmin() {
 		//Intentar postear un offer estando autenticado como admin
 		super.authenticate("admin");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
 		o.setMoment(new Date());
 		o.setBanned(false);
-		o.setCustomer(c);
 		Place p = null;
 		for (final Place pl : this.placeService.findAll()) {
 			p = pl;
@@ -133,7 +152,13 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.isTrue(c instanceof Customer);
+		Assert.notNull(c);
 
 		this.unauthenticate();
 	}
@@ -141,7 +166,9 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testTitleNull() {
 		//Fallo por title null
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+
+		final Customer c = this.customerService.findByPrincipal();
+
 		final Offer o = this.offerService.create();
 		o.setTitle(null);
 		o.setDescription("Desc Prueba");
@@ -155,16 +182,23 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		}
 		o.setOrigin(p);
 		o.setDestination(p);
-		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+
+		final Offer offer = this.offerService.save(o);
+		Assert.notNull(offer.getTitle());
+		Assert.notNull(offer.getDescription());
+		Assert.notNull(offer.getMoment());
+		Assert.isTrue(offer.getTitle() != "");
+		Assert.isTrue(offer.getDescription() != "");
+		Assert.notNull(c);
 
 		this.unauthenticate();
+
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testTitleBlank() {
 		//Fallo por title vacio
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("");
 		o.setDescription("Desc Prueba");
@@ -179,7 +213,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.notNull(c);
 
 		this.unauthenticate();
 	}
@@ -187,7 +226,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testDescNull() {
 		//Fallo por descripcion null
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");
 		o.setDescription(null);
@@ -202,7 +241,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.notNull(c);
 
 		this.unauthenticate();
 	}
@@ -210,7 +254,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testDescBlank() {
 		//Fallo por descripcion vacia
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");
 		o.setDescription("");
@@ -225,7 +269,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.notNull(c);
 
 		this.unauthenticate();
 	}
@@ -233,7 +282,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testMomentNull() {
 		//Fallo por moment null
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");
 		o.setDescription("Desc prueba");
@@ -248,7 +297,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(p);
 		o.setDestination(p);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.notNull(c);
 
 		this.unauthenticate();
 	}
@@ -256,7 +310,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	public void testNoPlaces() {
 		//Fallo por places null
 		super.authenticate("customer");
-		final Customer c = (Customer) this.actorService.findActorByPrincipal();
+		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");
 		o.setDescription("Desc prueba");
@@ -266,7 +320,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		o.setOrigin(null);
 		o.setDestination(null);
 		final Offer ores = this.offerService.save(o);
-		Assert.isTrue(ores.getId() != 0);
+		Assert.notNull(ores.getTitle());
+		Assert.notNull(ores.getDescription());
+		Assert.notNull(ores.getMoment());
+		Assert.isTrue(ores.getTitle() != "");
+		Assert.isTrue(ores.getDescription() != "");
+		Assert.notNull(c);
 
 		this.unauthenticate();
 	}
