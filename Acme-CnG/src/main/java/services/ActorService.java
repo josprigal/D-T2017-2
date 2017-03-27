@@ -13,6 +13,7 @@ import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -40,6 +41,13 @@ public class ActorService {
 		Actor result;
 		result = this.actorRepository.findOne(id);
 		Assert.notNull(result);
+		return result;
+	}
+
+	public Actor findByPrincipal(){
+		Actor result = actorRepository.findByUserAccountId(LoginService.getPrincipal().getId());
+		Assert.notNull(result);
+
 		return result;
 	}
 
@@ -91,13 +99,7 @@ public class ActorService {
 	}
 
 	public Collection<Actor> actorMoreThan10Percent() {
-		// TODO Auto-generated method stub
-		final Collection<Actor> result = new ArrayList<Actor>();
-		final Integer tam = this.commentService.findAll().size();
-		for (final Actor a : this.findAll())
-			if (a.getComments().size() >= tam)
-				result.add(a);
-		return result;
+		return actorRepository.postedMoreThan10PercentAvg();
 	}
 
 	public Collection<Actor> actorHasMoreMessages() {
@@ -114,4 +116,7 @@ public class ActorService {
 		return this.actorRepository.findByUserAccountId(userAccount.getId());
 	}
 
+	public Double avgCommentsPostedPerActor() {
+		return actorRepository.avgCommentsPostedPerActor();
+	}
 }

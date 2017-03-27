@@ -19,7 +19,7 @@ import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Actor extends DomainEntity {
+public class Actor extends CanBeCommented {
 
 	private String	name;
 	private String	email;
@@ -30,8 +30,7 @@ public class Actor extends DomainEntity {
 		super();
 		this.messagesReceived = new ArrayList<>();
 		this.messagesSent = new ArrayList<>();
-		this.comments = new ArrayList<Comment>();
-		this.applications = new ArrayList<Application>();
+		this.commentsSent = new ArrayList<>();
 	}
 
 	@NotBlank
@@ -65,28 +64,19 @@ public class Actor extends DomainEntity {
 
 	private Collection<Message> messagesReceived;
 	private Collection<Message> messagesSent;
-	private Collection<Comment>		comments;
-	private Collection<Application>	applications;
+	private Collection<Comment> commentsSent;
 
 
 
 	@OneToMany(mappedBy = "actor")
-	public Collection<Comment> getComments() {
-		return this.comments;
+	public Collection<Comment> getCommentsSent() {
+		return this.commentsSent;
 	}
 
-	public void setComments(final Collection<Comment> comments) {
-		this.comments = comments;
+	public void setCommentsSent(final Collection<Comment> comments) {
+		this.commentsSent = comments;
 	}
 
-	@OneToMany()
-	public Collection<Application> getApplications() {
-		return this.applications;
-	}
-
-	public void setApplications(final Collection<Application> applications) {
-		this.applications = applications;
-	}
 
 
 	private UserAccount	userAccount;
@@ -128,8 +118,7 @@ public class Actor extends DomainEntity {
                 ", phone='" + phone + '\'' +
                 ", messagesReceived=" + messagesReceived +
                 ", messagesSent=" + messagesSent +
-                ", comments=" + comments +
-                ", applications=" + applications +
+                ", comments=" + commentsSent +
                 ", userAccount=" + userAccount +
                 '}';
     }

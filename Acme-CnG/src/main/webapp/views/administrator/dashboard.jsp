@@ -30,17 +30,6 @@
 <br>
 
 
-
-<p>
-	<spring:message code="administrator.avgCommensPerAdmin" />
-	${avgCommensPerAdmin}
-</p>
-<br>
-
-<p>
-	<spring:message code="administrator.avgCommensPerCustomer" />
-	${avgCommensPerCustomer}
-</p>
 <br>
 
 <p>
@@ -57,6 +46,11 @@
 <p>
 	<spring:message code="administrator.avgCommensPerRequest" />
 	${avgCommensPerRequest}
+</p>
+<br>
+<p>
+	<spring:message code="avgCommentsPostedPerActor"/>
+	${avgCommentsPostedPerActor}
 </p>
 <br>
 <p>

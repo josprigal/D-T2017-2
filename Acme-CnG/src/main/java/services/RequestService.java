@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 
+import domain.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,9 @@ public class RequestService {
 
 	@Autowired
 	RequestRepository	requestRepository;
+
+	@Autowired
+	private ActorService actorService;
 
 
 	public RequestService() {
@@ -71,4 +75,17 @@ public class RequestService {
 
 		save(request);
     }
+
+	public Collection<Request> findAllNotBaned() {
+		Collection<Request> result;
+		if (LoginService.hasRole("ADMIN")) {
+			result = requestRepository.findAll();
+			Assert.notNull(result);
+			return result;
+		}
+		result = requestRepository.findAllNotBaned(actorService.findByPrincipal().getId());
+		Assert.notNull(result);
+
+		return result;
+	}
 }

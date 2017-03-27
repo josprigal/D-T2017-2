@@ -11,14 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-    <form:form action="actor/comment/new.do"  modelAttribute="form" method="POST">
-	
-	<jstl:if test="${comment.id != 0}">
-	<form:hidden path="comment.id" />
-	<form:hidden path="comment.version" />
-	<form:hidden path="comment.offerOrRequest" />
-        <form:hidden path="comment.actor" />
-	</jstl:if>
+    <form:form action=""  modelAttribute="form" method="POST">
 
         
 	<acme:textbox path="comment.title" code="comment.title"/>
@@ -32,12 +25,7 @@
         <form:hidden path="comment.banned" />
            	<br />     
         <acme:submit name="save" code="comment.post"/>
-        
 
-        
-        
-
-	
 	
 	
 	<a href="javascript:history.back(1)"><spring:message

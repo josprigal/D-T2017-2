@@ -35,11 +35,17 @@
     
     <spring:message code="edit" var="editHeader"/>
     <display:column title="${editHeader }">
-			<a href="actor/comment/r/${row.id}/new.do">
-				<spring:message	code="edit" />
+			<a href="actor/comment/${row.id}/list.do">
+                <spring:message	code="comments" />
 			</a>
-	</display:column>	
+	</display:column>
 
+    <spring:message code="applicate" var="applicateHeader"/>
+    <display:column title="${applicateHeader }">
+        <a href="application/${row.id}/new.do">
+            <spring:message	code="applicate" />
+        </a>
+    </display:column>
 </display:table>
 
 <a href="actor/customer/request/post.do"><spring:message code="post"/> </a>

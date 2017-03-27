@@ -85,7 +85,7 @@ public class AdministratorController extends AbstractController {
 
         }
 
-        return new ModelAndView("redirect:banrequest.do");
+        return new ModelAndView("redirect:/administrator/banrequest.do");
     }
 
     public ModelAndView banRequestView() {

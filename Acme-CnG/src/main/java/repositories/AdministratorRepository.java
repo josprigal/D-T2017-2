@@ -12,6 +12,6 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 
 	@Query("select a from Administrator a where a.userAccount.id = ?1")
 	Administrator findByUserAccountId(int userAccountId);
-	@Query("select avg(c.comments.size) from Administrator c")
+	@Query("select avg(c.commentsSent.size) from Administrator c")
 	Double avgCommensPerAdministrator();
 }

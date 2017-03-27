@@ -9,12 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.AdministratorService;
-import services.CustomerService;
-import services.OfferOrRequestService;
-import services.OfferService;
-import services.RequestService;
+import services.*;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Customer;
@@ -38,6 +33,8 @@ public class DashboardAdministratorController extends AbstractController {
 	@Autowired
 	private RequestService			requestService;
 
+	@Autowired
+	private CanBeCommentedService canBeCommentedService;
 
 	// Constructor
 
@@ -54,12 +51,11 @@ public class DashboardAdministratorController extends AbstractController {
 		final Double ratioOffersVersusRequest = this.offerOrRequestService.ratioOffersVersusRequest();
 		final Double avgOffersAndRequestCustomer = this.customerService.avgOffersAndRequestCustomer();
 		final Double avgApplicationsPerOfferOrRequest = this.offerOrRequestService.avgApplicationsPerOfferOrRequest();
-		final Double avgCommensPerAdmin = this.administratorService.avgCommensPerAdmin();
-		final Double avgCommensPerCustomer = this.customerService.avgCommensPerCustomer();
-		final Double avgCommensPerActor = this.actorService.avgCommensPerActor();
-		final Double avgCommensPerOffer = this.offerService.avgCommensPerOffer();
-		final Double avgCommensPerRequest = this.requestService.avgCommensPerRequest();
 		final Integer minMessagesSentPerActor = this.actorService.minMessagesSentPerActor();
+		final Double avgCommentsPerActor = actorService.avgCommensPerActor();
+        final Double avgCommentsPerOffer = offerService.avgCommensPerOffer();
+        final Double avgCommentsPerRequest = requestService.avgCommensPerRequest();
+        final Double avgCommentsPostedPerActor = actorService.avgCommentsPostedPerActor();
 		final Integer maxMessagesSentPerActor = this.actorService.maxMessagesSentPerActor();
 		final Double avgMessagesSentPerActor = this.actorService.avgMessagesSentPerActor();
 		final Integer minMessagesReceivedPerActor = this.actorService.minMessagesReceivedPerActor();
@@ -71,30 +67,18 @@ public class DashboardAdministratorController extends AbstractController {
 		final Collection<Actor> actorHasMoreMessages = this.actorService.actorHasMoreMessages();
 		final Collection<Actor> actorSentMoreMessages = this.actorService.actorSentMoreMessages();
 
-		result = this.createDashboardModelAndView(ratioOffersVersusRequest, avgOffersAndRequestCustomer, avgApplicationsPerOfferOrRequest, avgCommensPerAdmin, avgCommensPerCustomer, avgCommensPerActor, avgCommensPerOffer, avgCommensPerRequest,
-			minMessagesSentPerActor, maxMessagesSentPerActor, avgMessagesSentPerActor, minMessagesReceivedPerActor, maxMessagesReceivedPerActor, avgMessagesReceivedPerActor, customerMoreDenied, customerMoreAccepted, actorMoreThan10Percent,
-			actorHasMoreMessages, actorSentMoreMessages);
-		return result;
-	}
-	protected ModelAndView createDashboardModelAndView(final Double ratioOffersVersusRequest, final Double avgOffersAndRequestCustomer, final Double avgApplicationsPerOfferOrRequest, final Double avgCommensPerAdmin, final Double avgCommensPerCustomer,
-		final Double avgCommensPerActor, final Double avgCommensPerOffer, final Double avgCommensPerRequest, final Integer minMessagesSentPerActor, final Integer maxMessagesSentPerActor, final Double avgMessagesSentPerActor,
-		final Integer minMessagesReceivedPerActor, final Integer maxMessagesReceivedPerActor, final Double avgMessagesReceivedPerActor, final Collection<Customer> customerMoreDenied, final Collection<Customer> customerMoreAccepted,
-		final Collection<Actor> actorMoreThan10Percent, final Collection<Actor> actorHasMoreMessages, final Collection<Actor> actorSentMoreMessages) {
-		ModelAndView result;
-
 		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("ratioOffersVersusRequest", ratioOffersVersusRequest);
 		result.addObject("avgOffersAndRequestCustomer", avgOffersAndRequestCustomer);
 		result.addObject("avgApplicationsPerOfferOrRequest", avgApplicationsPerOfferOrRequest);
-		result.addObject("avgCommensPerAdmin", avgCommensPerAdmin);
-		result.addObject("avgCommensPerCustomer", avgCommensPerCustomer);
-		result.addObject("avgCommensPerActor", avgCommensPerActor);
-		result.addObject("avgCommensPerOffer", avgCommensPerOffer);
-		result.addObject("avgCommensPerRequest", avgCommensPerRequest);
+		result.addObject("avgCommensPerActor", avgCommentsPerActor);
+		result.addObject("avgCommensPerOffer", avgCommentsPerOffer);
+		result.addObject("avgCommensPerRequest", avgCommentsPerRequest);
 		result.addObject("minMessagesSentPerActor", minMessagesSentPerActor);
 		result.addObject("maxMessagesSentPerActor", maxMessagesSentPerActor);
 		result.addObject("avgMessagesSentPerActor", avgMessagesSentPerActor);
+		result.addObject("avgCommentsPostedPerActor",avgCommentsPostedPerActor);
 		result.addObject("minMessagesReceivedPerActor", minMessagesReceivedPerActor);
 		result.addObject("maxMessagesReceivedPerActor", maxMessagesReceivedPerActor);
 		result.addObject("avgMessagesReceivedPerActor", avgMessagesReceivedPerActor);

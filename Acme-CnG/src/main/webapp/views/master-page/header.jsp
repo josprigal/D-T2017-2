@@ -36,6 +36,8 @@
 					<li class="arrow"></li>
 					<li><a href="actor/customer/offer/list.do"><spring:message code="master.page.customer.offer" /></a></li>
 					<li><a href="actor/customer/request/list.do"><spring:message code="master.page.customer.request" /></a></li>
+					<li><a href="application/list.do"><spring:message code="applicationsreceived" /></a></li>
+					<li><a href="application/sended.do"><spring:message code="applicationssended" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -53,6 +55,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+					<li><a href="actor/list.do"><spring:message code="actors"/> </a> </li>
 				</ul>
 			</li>
 

@@ -15,7 +15,7 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 	@Query("select a from Actor a where a.userAccount.id = ?1")
 	Actor findByUserAccountId(int userAccountId);
 
-	@Query("select avg(c.comments.size) from Actor c")
+	@Query("select avg(c.commentsSent.size) from Actor c")
 	Double avgCommensPerActor();
 
 	@Query("select min(c.messagesSent.size) from Actor c")
@@ -41,4 +41,10 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select c from Actor c where c.messagesSent.size=(select max(a.messagesSent.size)from Actor a)")
 	Collection<Actor> actorSentMoreMessages();
+
+	@Query("select a from Actor a where a.commentsSent.size> (select avg(a2.comments.size) from Actor a2)")
+	Collection<Actor> postedMoreThan10PercentAvg();
+
+	@Query("select avg(a.commentsSent.size) from Actor a")
+    Double avgCommentsPostedPerActor();
 }

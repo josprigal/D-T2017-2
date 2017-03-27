@@ -78,20 +78,19 @@ public class Comment extends DomainEntity {
 	}
 
 
-	private OfferOrRequest	offerOrRequest;
 	private Actor actor;
+	private CanBeCommented canBeCommented;
 
+	@ManyToOne
+    public CanBeCommented getCanBeCommented() {
+        return canBeCommented;
+    }
 
-	@ManyToOne()
-	public OfferOrRequest getOfferOrRequest() {
-		return this.offerOrRequest;
-	}
+    public void setCanBeCommented(CanBeCommented canBeCommented) {
+        this.canBeCommented = canBeCommented;
+    }
 
-	public void setOfferOrRequest(final OfferOrRequest offerOrRequest) {
-		this.offerOrRequest = offerOrRequest;
-	}
-	
-	@ManyToOne()
+    @ManyToOne()
 	public Actor getActor() {
 		return this.actor;
 	}

@@ -21,7 +21,7 @@ public class Customer extends Actor {
 
 
 	private Collection<OfferOrRequest>	offerOrRequests;
-
+	private Collection<Application> applications;
 
 	@OneToMany(mappedBy = "customer")
 	public Collection<OfferOrRequest> getOfferOrRequests() {
@@ -32,4 +32,12 @@ public class Customer extends Actor {
 		this.offerOrRequests = offerOrRequests;
 	}
 
+	@OneToMany(mappedBy = "actor")
+	public Collection<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(Collection<Application> applications) {
+		this.applications = applications;
+	}
 }

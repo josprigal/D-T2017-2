@@ -37,7 +37,7 @@ public class OfferCustomerController {
 	public ModelAndView listOffer() {
 		final ModelAndView result = new ModelAndView("actor/customer/offer/list");
 
-		final Collection<Offer> offers = this.offerService.findAll();
+		final Collection<Offer> offers = this.offerService.findAllNotBaned();
 
 		result.addObject("offers", offers);
 		result.addObject("requestURI", "actor/customer/offer/list.do");

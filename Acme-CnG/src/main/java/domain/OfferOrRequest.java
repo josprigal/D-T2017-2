@@ -5,13 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -19,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class OfferOrRequest extends DomainEntity {
+public class OfferOrRequest extends CanBeCommented {
 
 	public OfferOrRequest() {
 		super();
@@ -74,21 +68,13 @@ public class OfferOrRequest extends DomainEntity {
 	}
 
 
-	private Place					origin;
-	private Place					destination;
+	private Place origin;
+	private Place destination;
 	private Collection<Comment>		comments;
 	private Collection<Application>	applications;
 	private Customer				customer;
 
 
-	@OneToMany(mappedBy = "offerOrRequest")
-	public Collection<Comment> getComments() {
-		return this.comments;
-	}
-
-	public void setComments(final Collection<Comment> comments) {
-		this.comments = comments;
-	}
 
 	@ManyToOne
 	public Customer getCustomer() {
@@ -109,19 +95,19 @@ public class OfferOrRequest extends DomainEntity {
 
 	@OneToOne
 	public Place getOrigin() {
-		return this.origin;
+		return origin;
 	}
 
-	public void setOrigin(final Place origin) {
+	public void setOrigin(Place origin) {
 		this.origin = origin;
 	}
 
 	@OneToOne
 	public Place getDestination() {
-		return this.destination;
+		return destination;
 	}
 
-	public void setDestination(final Place destination) {
+	public void setDestination(Place destination) {
 		this.destination = destination;
 	}
 }

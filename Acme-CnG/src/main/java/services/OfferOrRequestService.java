@@ -14,6 +14,7 @@ import repositories.OfferOrRequestRepository;
 import domain.Offer;
 import domain.OfferOrRequest;
 import domain.Request;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -26,6 +27,9 @@ public class OfferOrRequestService {
 	@Autowired
 	OfferOrRequestRepository	offerOrRequestRepository;
 
+	@Autowired
+	ActorService actorService;
+
 
 	public OfferOrRequestService() {
 		super();
@@ -35,6 +39,19 @@ public class OfferOrRequestService {
 		Collection<OfferOrRequest> result;
 		result = this.offerOrRequestRepository.findAll();
 		Assert.notNull(result);
+		return result;
+	}
+
+	public Collection<OfferOrRequest> findAllNotBaned() {
+		Collection<OfferOrRequest> result;
+		if (LoginService.hasRole("ADMIN")) {
+			result = this.offerOrRequestRepository.findAll();
+			Assert.notNull(result);
+			return result;
+		}
+		result = offerOrRequestRepository.findAllNotBaned(actorService.findByPrincipal());
+		Assert.notNull(result);
+
 		return result;
 	}
 

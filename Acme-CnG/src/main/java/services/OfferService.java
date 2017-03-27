@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 
+import domain.OfferOrRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 
 import repositories.OfferRepository;
 import domain.Offer;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -18,6 +20,9 @@ public class OfferService {
 
 	@Autowired
 	OfferRepository	offerRepository;
+
+	@Autowired
+	private ActorService actorService;
 
 
 	public OfferService() {
@@ -63,5 +68,18 @@ public class OfferService {
 	public Offer reconstruct(final Offer offer, final BindingResult bindingResult) {
 
 		return offer;
+	}
+
+	public Collection<Offer> findAllNotBaned() {
+		Collection<Offer> result;
+		if (LoginService.hasRole("ADMIN")) {
+			result = offerRepository.findAll();
+			Assert.notNull(result);
+			return result;
+		}
+		result = offerRepository.findAllNotBaned(actorService.findByPrincipal().getId());
+		Assert.notNull(result);
+
+		return result;
 	}
 }

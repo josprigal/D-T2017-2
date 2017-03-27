@@ -16,6 +16,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	Customer findByUserAccountName(String userAccount);
 	@Query("select avg(c.offerOrRequests.size) from Customer c")
 	Double avgOffersAndRequestCustomer();
-	@Query("select avg(c.comments.size) from Customer c")
+	@Query("select avg(c.commentsSent.size) from Customer c")
 	Double avgCommensPerCustomer();
 }

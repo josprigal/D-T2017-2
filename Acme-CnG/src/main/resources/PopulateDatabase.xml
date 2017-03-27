@@ -25,8 +25,8 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="customer1" />
+		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -51,6 +51,18 @@
 		</property>
 	</bean>
 
+
+    <bean id="userAccount4" class="security.UserAccount">
+        <property name="username" value="customer2" />
+        <property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
+        <property name="authorities">
+            <list>
+                <bean class="security.Authority">
+                    <property name="authority" value="CUSTOMER" />
+                </bean>
+            </list>
+        </property>
+    </bean>
 	<!-- Other domain beans come here -->
 
 
@@ -100,17 +112,23 @@
 	
 
 	<bean id="application1" class="domain.Application">
-		<property name="type" value="accepted" />
+		<property name="type" value="ACCEPTED" />
+        <property name="actor" ref="customer1" />
+        <property name="offerOrRequest" ref="offer2" />
 
 	</bean>
 
 	<bean id="application2" class="domain.Application">
-		<property name="type" value="denied" />
+        <property name="type" value="DENIED" />
+        <property name="actor" ref="customer1" />
+        <property name="offerOrRequest" ref="offer1" />
 
 	</bean>
 
 	<bean id="application3" class="domain.Application">
-		<property name="type" value="denied" />
+        <property name="type" value="PENDING" />
+        <property name="actor" ref="customer1" />
+        <property name="offerOrRequest" ref="offer2" />
 
 	</bean>
 
@@ -130,14 +148,7 @@
         <property name="destination" ref="place8" />
 		<property name="comments">
 			<list>
-
 				<ref bean="comment1" />
-			</list>
-		</property>
-		<property name="applications">
-			<list>
-
-				<ref bean="application1" />
 			</list>
 		</property>
 		
@@ -157,13 +168,6 @@
 				<ref bean="comment2" />
 			</list>
 		</property>
-		<property name="applications">
-			<list>
-
-				<ref bean="application1" />
-				<ref bean="application2" />
-			</list>
-		</property>
 		
 	</bean>
 	
@@ -177,13 +181,6 @@
             <property name="origin" ref="place1" />
             <property name="destination" ref="place2" />
 		<property name="customer" ref="customer1" />
-		<property name="applications">
-			<list>
-
-				<ref bean="application1" />
-				<ref bean="application2" />
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="request2" class="domain.Request">
@@ -201,11 +198,6 @@
 				<ref bean="comment4" />
 			</list>
 		</property>
-		<property name="applications">
-			<list>
-
-			</list>
-		</property>
 		
 	</bean>
 	
@@ -216,7 +208,7 @@
 		<property name="text" value="text 1" />
 		<property name="rate" value="5" />
 		<property name="banned" value="true" />
-		<property name="offerOrRequest" ref="offer1" />
+		<property name="canBeCommented" ref="offer1"/>
 		<property name="actor" ref="customer1" />
 	</bean>
 	
@@ -226,7 +218,7 @@
 		<property name="text" value="text 2" />
 		<property name="rate" value="5" />
 		<property name="banned" value="false" />
-		<property name="offerOrRequest" ref="offer2" />
+		<property name="canBeCommented" ref="administrator2"/>
 		<property name="actor" ref="customer1" />
 	</bean>
 	
@@ -236,7 +228,7 @@
 		<property name="text" value="text 3" />
 		<property name="rate" value="5" />
 		<property name="banned" value="false" />
-		<property name="offerOrRequest" ref="request2" />
+        <property name="canBeCommented" ref="request1"/>
 		<property name="actor" ref="customer1" />
 	</bean>
 	
@@ -246,7 +238,7 @@
 		<property name="text" value="text 4" />
 		<property name="rate" value="5" />
 		<property name="banned" value="false" />
-		<property name="offerOrRequest" ref="request2" />
+        <property name="canBeCommented" ref="customer1"/>
 		<property name="actor" ref="administrator1" />
 	</bean>
 	
@@ -330,4 +322,24 @@
 			</list>
 		</property>
 	</bean>
+    <bean id="customer2" class="domain.Customer">
+
+        <property name="name" value="Customer 1" />
+        <property name="email" value="customer@super.es" />
+        <property name="phone" value="975398899" />
+        <property name="userAccount" ref="userAccount4" />
+        <property name="offerOrRequests">
+            <list>
+
+                <ref bean="offer2" />
+                <ref bean="request2" />
+            </list>
+        </property>
+
+        <property name="comments">
+            <list>
+                <ref bean="comment4" />
+            </list>
+        </property>
+    </bean>
 </beans>
