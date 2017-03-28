@@ -23,6 +23,7 @@
 					<li class="arrow"></li>
                     <li><a href="administrator/changeBanner.do"><spring:message code="master.page.administrator.changeBanner" /></a></li>
                     <li><a href="administrator/banrequest.do"><spring:message code="master.page.administrator.banrequest" /></a></li>
+					<li><a href="administrator/comment/list.do"><spring:message code="master.page.administrator.bancomments" /></a></li>
 					<li><a href="actor/administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 
 				</ul>
