@@ -284,8 +284,8 @@
 	<bean id="administrator1" class="domain.Administrator">
 
 		<property name="name" value="Admin 1" />
-		<property name="email" value="admin@super.es" />
-		<property name="phone" value="975398899" />
+		<property name="email" value="admin1@super.es" />
+		<property name="phone" value="975398890" />
 		<property name="userAccount" ref="userAccount1" />
 		<property name="comments">
 			<list>
@@ -298,15 +298,15 @@
 	<bean id="administrator2" class="domain.Administrator">
 
 		<property name="name" value="Admin 2" />
-		<property name="email" value="admin@super.es" />
-		<property name="phone" value="975398899" />
+		<property name="email" value="admin2@super.es" />
+		<property name="phone" value="975398891" />
 		<property name="userAccount" ref="userAccount3" />
 	</bean>
 <bean id="customer1" class="domain.Customer">
 
 		<property name="name" value="Customer 1" />
-		<property name="email" value="customer@super.es" />
-		<property name="phone" value="975398899" />
+		<property name="email" value="customer1@super.es" />
+		<property name="phone" value="975398892" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="offerOrRequests">
 			<list>
@@ -327,9 +327,9 @@
 	</bean>
     <bean id="customer2" class="domain.Customer">
 
-        <property name="name" value="Customer 1" />
-        <property name="email" value="customer@super.es" />
-        <property name="phone" value="975398899" />
+        <property name="name" value="Customer 2" />
+        <property name="email" value="customer2@super.es" />
+        <property name="phone" value="975398894" />
         <property name="userAccount" ref="userAccount4" />
         <property name="offerOrRequests">
             <list>
