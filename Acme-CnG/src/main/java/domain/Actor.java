@@ -52,7 +52,7 @@ public class Actor extends CanBeCommented {
 	}
 
 	@NotBlank
-	@Pattern(regexp = "/^(\\+|\\d)[0-9]{7,16}$/")
+	@Pattern(regexp = "^(\\+(?:00[1-9]|0[1-9]\\d|[1-9]\\d\\d)$*(\\((?:00[1-9]|0[1-9]\\d|[1-9]\\d\\d)$*\\)))?[0]?[a-zA-Z0-9\\- ]*$")
 	public String getPhone() {
 		return this.phone;
 	}

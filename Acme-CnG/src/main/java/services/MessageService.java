@@ -38,19 +38,21 @@ public class MessageService {
 		Assert.isTrue(id != 0);
 		Message result;
 		result = this.messageRepository.findOne(id);
-		Assert.notNull(result);
 		return result;
 	}
 
-	public void save(final Message Message) {
-		Assert.notNull(this.messageRepository);
-		this.messageRepository.save(Message);
+	public Message save(final Message Message) {
+		Assert.notNull(Message);
+		Assert.notNull(Message.getReceiver());
+		Assert.isTrue(Message.getSender() == actorService.findByPrincipal());
+		return this.messageRepository.save(Message);
 	}
 
 	public void delete(final Message message) {
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
 		Assert.isTrue(this.messageRepository.exists(message.getId()));
+		Assert.notNull(actorService.findActorByPrincipal());
 		this.messageRepository.delete(message);
 	}
 
@@ -58,6 +60,7 @@ public class MessageService {
 		Assert.notNull(message);
 		Actor actor = actorService.findByPrincipal();
 		Assert.notNull(actor);
+		Assert.notNull(message.getReceiver());
 		message.setSender(actor);
 		save(message);
     }

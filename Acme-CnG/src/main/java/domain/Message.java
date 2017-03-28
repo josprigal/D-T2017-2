@@ -3,10 +3,7 @@ package domain;
 
 import java.util.Date;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -70,7 +67,7 @@ public class Message extends DomainEntity {
 	private Actor sender;
 	private Actor receiver;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	public Actor getReceiver() {
 		return receiver;
 	}
@@ -79,7 +76,7 @@ public class Message extends DomainEntity {
 		this.receiver = receiver;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	public Actor getSender() {
 		return sender;
 	}

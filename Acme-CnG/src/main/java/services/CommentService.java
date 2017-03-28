@@ -62,7 +62,7 @@ public class CommentService {
 
 	public List<Comment> getAllNotBannedByCollection(List<Comment> comments) {
 		List<Comment> result = new ArrayList<>();
-		if (LoginService.hasRole("ADMIN")) return result;
+		if (LoginService.hasRole("ADMIN")) return comments;
 
 		for(Comment e: comments){
 			if (!e.isBanned()) result.add(e);
