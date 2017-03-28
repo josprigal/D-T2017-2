@@ -1,4 +1,3 @@
-
 package domain;
 
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -21,10 +21,9 @@ import security.UserAccount;
 @Access(AccessType.PROPERTY)
 public class Actor extends CanBeCommented {
 
-	private String	name;
-	private String	email;
-	private String	phone;
-
+	private String name;
+	private String email;
+	private String phone;
 
 	public Actor() {
 		super();
@@ -53,6 +52,7 @@ public class Actor extends CanBeCommented {
 	}
 
 	@NotBlank
+	@Pattern(regexp = "/^(\\+|\\d)[0-9]{7,16}$/")
 	public String getPhone() {
 		return this.phone;
 	}
@@ -61,12 +61,9 @@ public class Actor extends CanBeCommented {
 		this.phone = phone;
 	}
 
-
 	private Collection<Message> messagesReceived;
 	private Collection<Message> messagesSent;
 	private Collection<Comment> commentsSent;
-
-
 
 	@OneToMany(mappedBy = "actor")
 	public Collection<Comment> getCommentsSent() {
@@ -77,11 +74,8 @@ public class Actor extends CanBeCommented {
 		this.commentsSent = comments;
 	}
 
-
-
-	private UserAccount	userAccount;
-
-
+	private UserAccount userAccount;
+ 
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
 	public UserAccount getUserAccount() {
@@ -92,7 +86,7 @@ public class Actor extends CanBeCommented {
 		this.userAccount = userAccount;
 	}
 
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
 	public Collection<Message> getMessagesReceived() {
 		return messagesReceived;
 	}
@@ -101,7 +95,7 @@ public class Actor extends CanBeCommented {
 		this.messagesReceived = messagesReceived;
 	}
 
-	@OneToMany(mappedBy = "sender",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
 	public Collection<Message> getMessagesSent() {
 		return messagesSent;
 	}
@@ -110,5 +104,6 @@ public class Actor extends CanBeCommented {
 		this.messagesSent = messagesSent;
 	}
 
-    
+
+
 }
