@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import domain.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.ActorRepository;
 import repositories.CommentRepository;
-import domain.Comment;
 import security.LoginService;
+import domain.Actor;
+import domain.Comment;
 
 @Service
 @Transactional
@@ -23,13 +22,15 @@ public class CommentService {
 	@Autowired
 	CommentRepository	commentRepository;
 	@Autowired
-	ActorService actorService;
+	ActorService		actorService;
 
 
 	public CommentService() {
 		super();
 	}
-
+	public Comment create() {
+		return new Comment();
+	}
 	public Collection<Comment> findAll() {
 		Collection<Comment> result;
 		result = this.commentRepository.findAll();
@@ -45,11 +46,11 @@ public class CommentService {
 		return result;
 	}
 
-	public void save(final Comment comment) {
+	public Comment save(final Comment comment) {
 		Assert.notNull(this.commentRepository);
-		Actor a = actorService.findByPrincipal();
+		final Actor a = this.actorService.findByPrincipal();
 		comment.setActor(a);
-		this.commentRepository.save(comment);
+		return this.commentRepository.save(comment);
 	}
 
 	public void delete(final Comment comment) {
@@ -59,19 +60,16 @@ public class CommentService {
 		this.commentRepository.delete(comment);
 	}
 
+	public List<Comment> getAllNotBannedByCollection(final List<Comment> comments) {
+		final List<Comment> result = new ArrayList<>();
+		if (LoginService.hasRole("ADMIN"))
+			return comments;
 
-	public List<Comment> getAllNotBannedByCollection(List<Comment> comments) {
-		List<Comment> result = new ArrayList<>();
-		if (LoginService.hasRole("ADMIN")) return comments;
-
-		for(Comment e: comments){
-			if (!e.isBanned()) result.add(e);
-			else{
-				if (e.getActor().getId() == actorService.findByPrincipal().getId()){
-					result.add(e);
-				}
-			}
-		}
+		for (final Comment e : comments)
+			if (!e.isBanned())
+				result.add(e);
+			else if (e.getActor().getId() == this.actorService.findByPrincipal().getId())
+				result.add(e);
 		return result;
 	}
 }
