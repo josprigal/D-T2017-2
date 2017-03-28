@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 
+import domain.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,9 @@ public class MessageService {
 
 	@Autowired
 	MessageRepository	messageRepository;
+
+	@Autowired
+	private ActorService actorService;
 
 
 	public MessageService() {
@@ -50,4 +54,11 @@ public class MessageService {
 		this.messageRepository.delete(message);
 	}
 
+    public void newMessage(Message message) {
+		Assert.notNull(message);
+		Actor actor = actorService.findByPrincipal();
+		Assert.notNull(actor);
+		message.setSender(actor);
+		save(message);
+    }
 }

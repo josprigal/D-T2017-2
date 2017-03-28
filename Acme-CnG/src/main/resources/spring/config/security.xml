@@ -53,6 +53,8 @@
 
 		<security:intercept-url pattern="/actor/comment/*/*" access="isAuthenticated()" />
 
+		<security:intercept-url pattern="/message/**" access="isAuthenticated()" />
+
 		<security:intercept-url pattern="/actor/list.do" access="permitAll" />
 
         <security:intercept-url pattern="/application/**" access="hasRole('CUSTOMER')" />

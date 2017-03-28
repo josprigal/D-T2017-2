@@ -268,9 +268,11 @@
 		<property name="sent" value="10/10/2013" />
 		<property name="text" value="text 1" />
 		<property name="attachments" value="https://www.google.es/" />
-	</bean>
-<bean id="message4" class="domain.Message">
+		<property name="receiver" ref="customer1"/>
+		<property name="sender" ref="administrator2" />
+ 	</bean>
 
+    <bean id="message4" class="domain.Message">
 		<property name="title" value="Message 4" />
 		<property name="sent" value="10/10/2013" />
 		<property name="sender" ref="customer1" />
@@ -278,6 +280,7 @@
 		<property name="attachments" value="https://www.google.es/" />
 		<property name="receiver" ref="administrator1" />
 	</bean>
+
 	<bean id="administrator1" class="domain.Administrator">
 
 		<property name="name" value="Admin 1" />

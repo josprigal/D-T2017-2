@@ -110,16 +110,5 @@ public class Actor extends CanBeCommented {
 		this.messagesSent = messagesSent;
 	}
 
-    @Override
-    public String toString() {
-        return "Actor{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", messagesReceived=" + messagesReceived +
-                ", messagesSent=" + messagesSent +
-                ", comments=" + commentsSent +
-                ", userAccount=" + userAccount +
-                '}';
-    }
+    
 }

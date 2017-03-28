@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,9 +68,14 @@ public class RequestCustomerController {
 		final Place origin = this.placeService.reconstruct(editRequestForm.getOrigin(), bindingResult, false);
 		final Place destination = this.placeService.reconstruct(editRequestForm.getDestination(), bindingResult, false);
 		ModelAndView result;
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) {
+			for(ObjectError e: bindingResult.getAllErrors()){
+				System.out.println(e.getCode());
+				System.out.println(e.getObjectName());
+				System.out.println(e.getDefaultMessage());
+			}
 			return this.createNewView(request, origin, destination);
-		else
+		}else
 			try {
 
 				this.placeService.save(origin);
@@ -82,7 +88,7 @@ public class RequestCustomerController {
 				result = new ModelAndView("redirect:/actor/customer/request/list.do");
 				return result;
 			} catch (final Throwable oops) {
-
+				System.out.println(oops.getMessage());
 				return this.createNewView(request, origin, destination, "request.commit.error");
 			}
 	}
