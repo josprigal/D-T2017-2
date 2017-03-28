@@ -53,13 +53,13 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test
 	public void testPostOffer() {
 		//Postear un offer normal
-		super.authenticate("customer");
+		super.authenticate("customer1");
 		final int size1 = this.offerService.findAll().size();//Listing
 		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(false);
 		o.setCustomer(c);
 		Place p = null;
@@ -85,7 +85,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test
 	public void testPostOffer2() {
 		//Postear un offer con comienzo baneeado (esto no se podria hacer desde el controller habria que banearlo posteriormente)
-		super.authenticate("customer");
+		super.authenticate("customer1");
 
 		final Customer c = this.customerService.findByPrincipal();
 		final int size1 = this.offerService.findAll().size(); //Listing
@@ -93,7 +93,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(true);
 		o.setCustomer(c);
 		Place p = null;
@@ -124,7 +124,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(false);
 		o.setCustomer(c);
 		Place p = null;
@@ -151,7 +151,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo prueba");
 		o.setDescription("Desc Prueba");
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(false);
 		Place p = null;
 		for (final Place pl : this.placeService.findAll()) {
@@ -174,14 +174,14 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testTitleNull() {
 		//Fallo por title null
-		super.authenticate("customer");
+		super.authenticate("customer1");
 
 		final Customer c = this.customerService.findByPrincipal();
 
 		final Offer o = this.offerService.create();
 		o.setTitle(null);
 		o.setDescription("Desc Prueba");
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(false);
 		o.setCustomer(c);
 		Place p = null;
@@ -206,12 +206,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testTitleBlank() {
 		//Fallo por title vacio
-		super.authenticate("customer");
+		super.authenticate("customer1");
 		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("");
 		o.setDescription("Desc Prueba");
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(false);
 		o.setCustomer(c);
 		Place p = null;
@@ -234,12 +234,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testDescNull() {
 		//Fallo por descripcion null
-		super.authenticate("customer");
+		super.authenticate("customer1");
 		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");
 		o.setDescription(null);
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(false);
 		o.setCustomer(c);
 		Place p = null;
@@ -262,12 +262,12 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testDescBlank() {
 		//Fallo por descripcion vacia
-		super.authenticate("customer");
+		super.authenticate("customer1");
 		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");
 		o.setDescription("");
-		o.setMoment(new Date());
+		o.setMoment(new Date(System.currentTimeMillis() - 1));
 		o.setBanned(false);
 		o.setCustomer(c);
 		Place p = null;
@@ -290,7 +290,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testMomentNull() {
 		//Fallo por moment null
-		super.authenticate("customer");
+		super.authenticate("customer1");
 		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");
@@ -318,7 +318,7 @@ public class PostOfferUseCaseTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNoPlaces() {
 		//Fallo por places null
-		super.authenticate("customer");
+		super.authenticate("customer1");
 		final Customer c = this.customerService.findByPrincipal();
 		final Offer o = this.offerService.create();
 		o.setTitle("Titulo de prueba");

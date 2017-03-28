@@ -3,7 +3,6 @@ package services;
 
 import java.util.Collection;
 
-import domain.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,24 +10,27 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
 import repositories.RequestRepository;
-import domain.Request;
 import security.LoginService;
+import domain.Request;
 
 @Service
 @Transactional
 public class RequestService {
 
 	@Autowired
-	RequestRepository	requestRepository;
+	RequestRepository		requestRepository;
 
 	@Autowired
-	private ActorService actorService;
+	private ActorService	actorService;
 
 
 	public RequestService() {
 		super();
 	}
-
+	public Request create() {
+		final Request request = new Request();
+		return request;
+	}
 	public Collection<Request> findAll() {
 		Collection<Request> result;
 		result = this.requestRepository.findAll();
@@ -44,9 +46,10 @@ public class RequestService {
 		return result;
 	}
 
-	public void save(final Request request) {
+	public Request save(final Request request) {
 		Assert.notNull(this.requestRepository);
-		this.requestRepository.save(request);
+		final Request res = this.requestRepository.save(request);
+		return res;
 	}
 
 	public void delete(final Request request) {
@@ -69,21 +72,21 @@ public class RequestService {
 
 		return offer;
 	}
-    public void banRequest(Request request) {
+	public void banRequest(final Request request) {
 		Assert.isTrue(LoginService.hasRole("ADMIN"));
 		request.setBanned(true);
 
-		save(request);
-    }
+		this.save(request);
+	}
 
 	public Collection<Request> findAllNotBaned() {
 		Collection<Request> result;
 		if (LoginService.hasRole("ADMIN")) {
-			result = requestRepository.findAll();
+			result = this.requestRepository.findAll();
 			Assert.notNull(result);
 			return result;
 		}
-		result = requestRepository.findAllNotBaned(actorService.findByPrincipal().getId());
+		result = this.requestRepository.findAllNotBaned(this.actorService.findByPrincipal().getId());
 		Assert.notNull(result);
 
 		return result;
